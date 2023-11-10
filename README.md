@@ -4,7 +4,7 @@ Social Media Web App
 
 • Tech Stack: Java, Spring Boot, JavaScript, React, Redux, Bootstrap, MySQL, Hibernate, JUnit, React Testing Library, Jest
 
-• Implemented social media features like real-time text posts, image posts, profile picture, public user view & update profile
+• Implemented social media features like real-time text posts, image posts, profile picture, public user view, update profile & users list
 
 • Implemented Login & Signup using Spring Security, image, file attachment storage. Test driven development with Unit Tests for backend & frontend
 
