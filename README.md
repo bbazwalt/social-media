@@ -6,7 +6,7 @@ Social Media Web App
 
 • Implemented social media features like real-time text posts, image posts, profile picture, public user view & update profile
 
-• Implemeted Login & Signup using Spring Security, image, file attachment storage. Test driven development with Unit Tests for backend & frontend
+• Implemented Login & Signup using Spring Security, image, file attachment storage. Test driven development with Unit Tests for backend & frontend
 
 
 ## Login Page:
