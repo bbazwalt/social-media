@@ -12,6 +12,7 @@ const PostFeed = (props) => {
   const [isDeletingPost, setDeletingPost] = useState(false);
   const [newPostCount, setNewPostCount] = useState(0);
   const [postToBeDeleted, setPostToBeDeleted] = useState();
+  const [noUserError,setNoUserError] = useState(false)
 
   useEffect(() => {
     const loadPosts = () => {
@@ -19,6 +20,11 @@ const PostFeed = (props) => {
       apiCalls.loadPosts(props.user).then((response) => {
         setLoadingPosts(false);
         setPage(response.data);
+        setNoUserError(false)
+      }).catch((error) => {
+        setLoadingPosts(false)
+        setPage({content:[]})
+        setNoUserError(true)
       });
     };
     loadPosts();
@@ -33,6 +39,11 @@ const PostFeed = (props) => {
       }
       apiCalls.loadNewPostCount(topPostId, props.user).then((response) => {
         setNewPostCount(response.data.count);
+        setNoUserError(false)
+      }).catch((error)=>{
+        setLoadingNewPosts(false)
+        setPage({content:[]})
+        setNoUserError(true)
       });
     };
     const counter = setInterval(checkCount, 3000);
@@ -60,9 +71,12 @@ const PostFeed = (props) => {
           content: [...previousPage.content, ...response.data.content],
         }));
         setLoadingOldPosts(false);
+        setNoUserError(false)
       })
       .catch((error) => {
         setLoadingOldPosts(false);
+        setPage({content:[]})
+        setNoUserError(true)
       });
   };
 
@@ -85,9 +99,12 @@ const PostFeed = (props) => {
         }));
         setLoadingNewPosts(false);
         setNewPostCount(0);
+        setNoUserError(false)
       })
       .catch((error) => {
         setLoadingNewPosts(false);
+        setPage({content:[]})
+        setNoUserError(true)
       });
   };
 
@@ -108,7 +125,7 @@ const PostFeed = (props) => {
   if (isLoadingPosts) {
     return <Spinner />;
   }
-  if (page.content.length === 0 && newPostCount === 0) {
+  if (page.content.length === 0 && newPostCount === 0 && !noUserError) {
     return (
       <div className="card card-body text-center mt-3">There are no posts</div>
     );
