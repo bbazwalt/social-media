@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import PostSubmit from "../components/post/PostSubmit";
 import PostFeed from "../components/post/PostFeed";
 
-const HomePage = (props) => {
+const Home = (props) => {
   return (
     <div data-testid="homepage">
       <div className="row">
@@ -26,4 +26,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(HomePage);
+export default connect(mapStateToProps)(Home);

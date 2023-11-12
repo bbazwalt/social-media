@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import * as authActions from "../redux/authActions";
 
-const LoginPage = (props) => {
+const Login = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [apiError, setApiError] = useState(undefined);
@@ -83,7 +83,7 @@ const LoginPage = (props) => {
   );
 };
 
-LoginPage.defaultProps = {
+Login.defaultProps = {
   actions: {
     postLogin: () =>
       new Promise((resolve, reject) => {
@@ -101,4 +101,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(LoginPage);
+export default connect(null, mapDispatchToProps)(Login);

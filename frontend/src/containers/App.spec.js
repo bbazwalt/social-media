@@ -110,7 +110,7 @@ describe("App", () => {
     const homePageDiv = screen.queryByTestId("homepage");
     expect(homePageDiv).not.toBeInTheDocument();
   });
-  test("displays UserSignupPage when url is /signup", () => {
+  test("displays SignupPage when url is /signup", () => {
     setup("/signup");
     const header = screen.queryByRole("heading", { level: 1 });
     expect(header).toHaveTextContent("Sign Up");
@@ -141,7 +141,7 @@ describe("App", () => {
     expect(navigation).toBeInTheDocument();
   });
 
-  test("shows the UserSignupPage when clicking signup", () => {
+  test("shows the SignupPage when clicking signup", () => {
     setup("/");
     const signupLink = screen.queryByText("Sign Up");
     fireEvent.click(signupLink);

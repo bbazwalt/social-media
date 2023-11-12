@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { userReducer } from "../redux/userReducer";
 import Spinner from "../components/shared/Spinner";
 
-const UserPage = (props) => {
+const User = (props) => {
   const [state, dispatch] = useReducer(userReducer, {
     user: undefined,
     userNotFound: false,
@@ -123,7 +123,7 @@ const UserPage = (props) => {
   );
 };
 
-UserPage.defaultProps = {
+User.defaultProps = {
   match: {
     params: {},
   },
@@ -134,4 +134,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(UserPage);
+export default connect(mapStateToProps)(User);

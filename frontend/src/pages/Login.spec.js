@@ -1,6 +1,6 @@
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
-import LoginPage from "./LoginPage";
+import Login from "./Login";
 import { Provider } from "react-redux";
 import configureStore from "../redux/configureStore";
 import { MemoryRouter } from "react-router-dom";
@@ -17,7 +17,7 @@ const setup = () => {
   return render(
     <Provider store={store}>
       <MemoryRouter>
-        <LoginPage />
+        <Login />
       </MemoryRouter>
     </Provider>
   );
@@ -84,7 +84,7 @@ describe("LoginPage", () => {
       const view = render(
         <Provider store={store}>
           <MemoryRouter>
-            <LoginPage {...props} />
+            <Login {...props} />
           </MemoryRouter>
         </Provider>
       );

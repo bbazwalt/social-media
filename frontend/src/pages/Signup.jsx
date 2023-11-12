@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import * as authActions from "../redux/authActions";
 
-const SignupPage = (props) => {
+const Signup = (props) => {
   const [form, setForm] = useState({
     displayName: "",
     username: "",
@@ -132,7 +132,7 @@ const SignupPage = (props) => {
   );
 };
 
-SignupPage.defaultProps = {
+Signup.defaultProps = {
   actions: {
     postSignup: () =>
       new Promise((resolve, reject) => {
@@ -149,4 +149,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(SignupPage);
+export default connect(null, mapDispatchToProps)(Signup);

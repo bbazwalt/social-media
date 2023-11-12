@@ -5,7 +5,7 @@ import {
   screen,
   waitForElementToBeRemoved,
 } from "@testing-library/react";
-import SignupPage from "./SignupPage";
+import Signup from "./Signup";
 import configureStore from "../redux/configureStore";
 import { Provider } from "react-redux";
 
@@ -13,7 +13,7 @@ const setup = () => {
   const store = configureStore(false);
   return render(
     <Provider store={store}>
-      <SignupPage />
+      <Signup />
     </Provider>
   );
 };
@@ -105,7 +105,7 @@ describe("Signup", () => {
       const store = configureStore(false);
       const view = render(
         <Provider store={store}>
-          <SignupPage {...props} />
+          <Signup {...props} />
         </Provider>
       );
 

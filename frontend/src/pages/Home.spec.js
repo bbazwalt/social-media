@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import React from "react";
-import HomePage from "./HomePage";
+import Home from "./Home";
 import * as apiCalls from "../api/apiCalls";
 import { legacy_createStore } from "redux";
 import { Provider } from "react-redux";
@@ -21,7 +21,7 @@ const setup = (state = defaultState) => {
   store = legacy_createStore(authReducer, state);
   return render(
     <Provider store={store}>
-      <HomePage />
+      <Home />
     </Provider>
   );
 };

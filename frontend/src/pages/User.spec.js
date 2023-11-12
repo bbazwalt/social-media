@@ -6,7 +6,7 @@ import {
   waitForElementToBeRemoved,
 } from "@testing-library/react";
 import React from "react";
-import UserPage from "./UserPage";
+import User from "./User";
 import * as apiCalls from "../api/apiCalls";
 import axios from "axios";
 import { Provider } from "react-redux";
@@ -67,7 +67,7 @@ const setup = (props) => {
   store = configureStore(false);
   return render(
     <Provider store={store}>
-      <UserPage {...props} />
+      <User {...props} />
     </Provider>
   );
 };
