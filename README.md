@@ -2,11 +2,11 @@
 
 Social Media Web App • Live Link: https://social-media-web-react.vercel.app/
 
-• Tech Stack: Java, Spring Boot, JavaScript, React, Redux, Bootstrap, MySQL, Hibernate, JUnit, React Testing Library, Jest, Vercel, Railway
+• Tech Stack: Java, Spring Boot, JavaScript, React, Redux, Bootstrap, MySQL, Hibernate, JUnit, React Testing Library, Jest, Vercel & Railway
 
-• Implemented social media features like real-time text posts, image posts, profile picture, public user view, update profile, users list, image & file attachment storage
+• Implemented social media functionalities such as real-time text & image posting, profile picture management, public user profiles, profile updates, user lists & storage for image & file attachments.
 
-• Deployed app on Vercel. Used External API endpoints like Railway MySQL Server. Implemented Login & Signup using Spring Security. Test driven development with Unit Tests for backend & frontend
+• Deployed the application on Vercel & integrated external API endpoints such as the Railway MySQL Server. Implemented secure Login & Signup functionalities using Spring Security & applied Test-Driven Development (TDD) with unit tests for both backend & frontend modules
 
 
 ## Login Page:
