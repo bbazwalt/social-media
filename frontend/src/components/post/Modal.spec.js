@@ -45,3 +45,5 @@ describe("Modal", () => {
     });
   });
 });
+
+console.error = () => {};

@@ -86,3 +86,5 @@ describe("ProfileCard", () => {
     });
   });
 });
+
+console.error = () => {};

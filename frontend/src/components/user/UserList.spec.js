@@ -248,3 +248,5 @@ describe("UserList", () => {
     });
   });
 });
+
+console.error = () => {};

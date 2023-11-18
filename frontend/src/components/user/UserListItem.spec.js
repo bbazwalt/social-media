@@ -38,3 +38,4 @@ describe("UserListItem", () => {
     expect(image.src).toContain("/images/profile/" + user.image);
   });
 });
+console.error = () => {};

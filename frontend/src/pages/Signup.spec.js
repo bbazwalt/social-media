@@ -239,3 +239,4 @@ describe("Signup", () => {
     });
   });
 });
+console.error = () => {};

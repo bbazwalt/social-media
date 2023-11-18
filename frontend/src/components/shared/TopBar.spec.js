@@ -130,3 +130,4 @@ describe("TopBar", () => {
     });
   });
 });
+console.error = () => {};

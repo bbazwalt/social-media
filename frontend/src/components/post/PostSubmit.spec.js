@@ -576,3 +576,5 @@ describe("PostSubmit", () => {
     });
   });
 });
+
+console.error = () => {};

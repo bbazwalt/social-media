@@ -176,3 +176,4 @@ describe("LoginPage", () => {
     });
   });
 });
+console.error = () => {};

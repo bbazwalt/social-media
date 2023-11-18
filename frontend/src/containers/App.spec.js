@@ -324,3 +324,5 @@ describe("App", () => {
     expect(user1Info).toBeInTheDocument();
   });
 });
+
+console.error = () => {};

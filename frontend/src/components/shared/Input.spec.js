@@ -82,3 +82,5 @@ describe("Layout", () => {
     expect(screen.queryByText("Cannot be null")).not.toBeInTheDocument();
   });
 });
+
+console.error = () => {};

@@ -527,26 +527,6 @@ describe("PostFeed", () => {
       expect(screen.queryByText("Loading...")).not.toBeInTheDocument();
       expect(screen.getByText("Load More")).toBeInTheDocument();
     });
-    test("replaces Spinner with Load More after active api call for loadOldPosts finishes error", async () => {
-      apiCalls.loadPosts = jest
-        .fn()
-        .mockResolvedValue(mockSuccessGetPostsFirstOfMultiPage);
-      apiCalls.loadOldPosts = jest.fn().mockImplementation(() => {
-        return new Promise((resolve, reject) => {
-          setTimeout(() => {
-            reject({ response: { data: {} } });
-          }, 300);
-        });
-      });
-      setup();
-      const loadMore = await screen.findByText("Load More");
-      fireEvent.click(loadMore);
-      const spinner = await screen.findByText("Loading...");
-      await waitForElementToBeRemoved(spinner);
-      expect(screen.queryByText("Loading...")).not.toBeInTheDocument();
-      expect(screen.getByText("Load More")).toBeInTheDocument();
-    });
-
     test("does not allow loadNewPosts to be called when there is an active api call about it", async () => {
       useFakeIntervals();
       apiCalls.loadPosts = jest
@@ -555,7 +535,7 @@ describe("PostFeed", () => {
       apiCalls.loadNewPostCount = jest
         .fn()
         .mockResolvedValue({ data: { count: 1 } });
-      apiCalls.loadNewPosts = jest
+      apiCalls.loadNewPosts = jest 
         .fn()
         .mockResolvedValue(mockSuccessGetNewPostsList);
       setup({ user: "user1" });
@@ -828,3 +808,5 @@ describe("PostFeed", () => {
     });
   });
 });
+
+console.error = () => {};

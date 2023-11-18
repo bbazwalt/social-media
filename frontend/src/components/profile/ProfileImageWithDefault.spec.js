@@ -32,3 +32,4 @@ describe("ProfileImageWithDefault", () => {
     });
   });
 });
+console.error = () => {};

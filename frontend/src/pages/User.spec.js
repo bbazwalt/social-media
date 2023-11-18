@@ -515,3 +515,4 @@ describe("UserPage", () => {
     });
   });
 });
+console.error = () => {};
