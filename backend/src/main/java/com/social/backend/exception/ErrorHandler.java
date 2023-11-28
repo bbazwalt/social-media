@@ -1,4 +1,4 @@
-package com.social.backend.error;
+package com.social.backend.exception;
 
 import java.util.Map;
 
@@ -27,5 +27,6 @@ public class ErrorHandler implements ErrorController {
 		int status = (Integer) attributes.get("status");
 		return new ApiError(status, message, url);
 	}
+
 
 }

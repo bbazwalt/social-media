@@ -18,6 +18,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
+import com.social.backend.auth.AuthUserService;
+
 import jakarta.servlet.http.HttpServletRequest;
 
 @Configuration

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.social.backend.error.ApiError;
+import com.social.backend.exception.ApiError;
 
 import jakarta.servlet.http.HttpServletRequest;
 

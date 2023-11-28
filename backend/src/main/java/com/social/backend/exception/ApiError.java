@@ -1,4 +1,4 @@
-package com.social.backend.error;
+package com.social.backend.exception;
 
 import java.util.Date;
 import java.util.Map;

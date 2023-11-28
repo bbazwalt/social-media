@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.social.backend.error.NotFoundException;
+import com.social.backend.exception.NotFoundException;
 import com.social.backend.file.FileService;
 import com.social.backend.user.vm.UserUpdateVM;
 

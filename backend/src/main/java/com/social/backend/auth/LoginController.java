@@ -1,9 +1,10 @@
-package com.social.backend.user;
+package com.social.backend.auth;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.social.backend.shared.CurrentUser;
+import com.social.backend.user.User;
 import com.social.backend.user.vm.UserVM;
 
 @RestController

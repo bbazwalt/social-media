@@ -1,4 +1,4 @@
-package com.social.backend.configuration;
+package com.social.backend.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
