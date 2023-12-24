@@ -6,7 +6,7 @@ Social Media Web App • Live Link: https://social-media-web-react.vercel.app/
 
 • Implemented social media functionalities such as real-time text & image posting, profile picture, public user profiles, profile updates, user lists & storage for image & file attachments.
 
-• Deployed the Spring Boot Application on Railway & the React application on Vercel. Implemented secure Login & Signup functionalities using Spring Security & applied Test-Driven Development (TDD) with unit tests for both backend & frontend modules which can improve code quality, bug reduction, productivity up to 30%.
+• Deployed the Spring Boot Application on Railway & the React application on Vercel. Implemented secure Login & Signup functionalities using Spring Security & applied Test-Driven Development with the unit test code coverage of 77% in backend & 93% in frontend which can improve code quality, bug reduction up to 30%.
 
 
 ## Login Page:
