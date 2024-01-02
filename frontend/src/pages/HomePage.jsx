@@ -1,10 +1,9 @@
-import React from "react";
-import UserList from "../components/user/UserList";
 import { connect } from "react-redux";
-import PostSubmit from "../components/post/PostSubmit";
 import PostFeed from "../components/post/PostFeed";
+import PostSubmit from "../components/post/PostSubmit";
+import UserList from "../components/user/UserList";
 
-const Home = (props) => {
+const HomePage = (props) => {
   return (
     <div data-testid="homepage">
       <div className="row">
@@ -26,4 +25,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(HomePage);

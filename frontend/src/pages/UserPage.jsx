@@ -1,14 +1,14 @@
-import React, { useEffect, useReducer } from "react";
-import * as apiCalls from "../api/apiCalls";
-import { useParams } from "react-router-dom";
-import ProfileCard from "../components/profile/ProfileCard";
-import PostFeed from "../components/post/PostFeed";
+import { useEffect, useReducer } from "react";
 import { BsFillExclamationTriangleFill } from "react-icons/bs";
 import { connect } from "react-redux";
-import { userReducer } from "../redux/userReducer";
+import { useParams } from "react-router-dom";
+import * as apiCalls from "../api/apiCalls";
+import PostFeed from "../components/post/PostFeed";
+import ProfileCard from "../components/profile/ProfileCard";
 import Spinner from "../components/shared/Spinner";
+import { userReducer } from "../redux/userReducer";
 
-const User = (props) => {
+const UserPage = (props) => {
   const [state, dispatch] = useReducer(userReducer, {
     user: undefined,
     userNotFound: false,
@@ -123,7 +123,7 @@ const User = (props) => {
   );
 };
 
-User.defaultProps = {
+UserPage.defaultProps = {
   match: {
     params: {},
   },
@@ -134,4 +134,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(User);
+export default connect(mapStateToProps)(UserPage);

@@ -10,11 +10,8 @@ import lombok.NoArgsConstructor;
 public class UserVM {
 
 	private long id;
-
 	private String username;
-
 	private String displayName;
-
 	private String image;
 
 	public UserVM(User user) {

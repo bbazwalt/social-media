@@ -1,4 +1,3 @@
-import React from "react";
 import ButtonWithProgress from "../shared/ButtonWithProgress";
 
 const Modal = (props) => {

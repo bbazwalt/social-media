@@ -1,11 +1,10 @@
-import React from "react";
-import App from "./App";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
-import { Provider } from "react-redux";
 import axios from "axios";
-import configureStore from "../redux/configureStore";
+import { Provider } from "react-redux";
+import { MemoryRouter } from "react-router-dom";
 import * as apiCalls from "../api/apiCalls";
+import configureStore from "../redux/configureStore";
+import App from "./App";
 
 apiCalls.listUsers = jest.fn().mockResolvedValue({
   data: {
@@ -110,7 +109,7 @@ describe("App", () => {
     const homePageDiv = screen.queryByTestId("homepage");
     expect(homePageDiv).not.toBeInTheDocument();
   });
-  test("displays SignupPage when url is /signup", () => {
+  test("displays UserSignupPage when url is /signup", () => {
     setup("/signup");
     const header = screen.queryByRole("heading", { level: 1 });
     expect(header).toHaveTextContent("Sign Up");
@@ -141,7 +140,7 @@ describe("App", () => {
     expect(navigation).toBeInTheDocument();
   });
 
-  test("shows the SignupPage when clicking signup", () => {
+  test("shows the UserSignupPage when clicking signup", () => {
     setup("/");
     const signupLink = screen.queryByText("Sign Up");
     fireEvent.click(signupLink);

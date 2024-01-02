@@ -1,16 +1,15 @@
-import React from "react";
 import {
-  render,
   fireEvent,
+  render,
+  screen,
   waitFor,
   waitForElementToBeRemoved,
-  screen,
 } from "@testing-library/react";
-import PostSubmit from "./PostSubmit";
 import { Provider } from "react-redux";
 import { legacy_createStore } from "redux";
-import authReducer from "../../redux/authReducer";
 import * as apiCalls from "../../api/apiCalls";
+import authReducer from "../../redux/authReducer";
+import PostSubmit from "./PostSubmit";
 
 const defaultState = {
   id: 1,

@@ -1,11 +1,11 @@
-import React, { useRef } from "react";
-import logo from "../../assets/social-media-logo.png";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import ProfileImageWithDefault from "../profile/ProfileImageWithDefault";
-import useClickTracker from "../../shared/useClickTracker";
-import {FiLogOut} from "react-icons/fi"
+import { useRef } from "react";
 import { AiOutlineUser } from "react-icons/ai";
+import { FiLogOut } from "react-icons/fi";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import logo from "../../assets/social-media-logo.png";
+import useClickTracker from "../../shared/useClickTracker";
+import ProfileImageWithDefault from "../profile/ProfileImageWithDefault";
 const TopBar = (props) => {
   const actionArea = useRef();
   let dropDownVisible = useClickTracker(actionArea);
@@ -13,7 +13,7 @@ const TopBar = (props) => {
   const onClickLogout = () => {
     const action = {
       type: "LOGOUT_SUCCESS",
-    }; 
+    };
     props.dispatch(action);
   };
 
@@ -22,7 +22,7 @@ const TopBar = (props) => {
       <li className="nav-item">
         <Link to="/signup" className="nav-link">
           Sign Up
-        </Link> 
+        </Link>
       </li>
       <li className="nav-item">
         <Link to="/login" className="nav-link">
@@ -52,7 +52,8 @@ const TopBar = (props) => {
           </div>
           <div className={dropDownClass} data-testid="drop-down-menu">
             <Link to={`/${props.user.username}`} className="dropdown-item">
-              <AiOutlineUser className="mb-1 me-2" size="20"/>My Profile
+              <AiOutlineUser className="mb-1 me-2" size="20" />
+              My Profile
             </Link>
             <span
               className="dropdown-item"
@@ -61,7 +62,8 @@ const TopBar = (props) => {
                 cursor: "pointer",
               }}
             >
-              <FiLogOut className="mb-1 me-2" size="20"/>Logout
+              <FiLogOut className="mb-1 me-2" size="20" />
+              Logout
             </span>
           </div>
         </li>
@@ -74,7 +76,12 @@ const TopBar = (props) => {
       <div className="container">
         <nav aria-label="nav" className="navbar navbar-light navbar-expand">
           <Link to="/" className="navbar-brand">
-            <img src={logo} width="60" alt="Social Media" aria-label="social-media"/>
+            <img
+              src={logo}
+              width="60"
+              alt="Social Media"
+              aria-label="social-media"
+            />
             Social Media
           </Link>
           {links}

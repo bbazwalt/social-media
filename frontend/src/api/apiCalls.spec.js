@@ -9,7 +9,7 @@ describe("apiCalls", () => {
       axios.post = mockSignup;
       apiCalls.signup();
       const path = mockSignup.mock.calls[0][0];
-      expect(path).toBe(BASE_URL+"/api/v1/users");
+      expect(path).toBe(BASE_URL + "/api/v1/users");
     });
   });
   describe("login", () => {
@@ -18,7 +18,7 @@ describe("apiCalls", () => {
       axios.post = mockLogin;
       apiCalls.login({ username: "test-user", password: "P4ssword" });
       const path = mockLogin.mock.calls[0][0];
-      expect(path).toBe(BASE_URL+"/api/v1/login");
+      expect(path).toBe(BASE_URL + "/api/v1/login");
     });
   });
   describe("listUser", () => {
@@ -26,27 +26,33 @@ describe("apiCalls", () => {
       const mockListUsers = jest.fn();
       axios.get = mockListUsers;
       apiCalls.listUsers();
-      expect(mockListUsers).toHaveBeenCalledWith(BASE_URL+"/api/v1/users?page=0&size=3");
+      expect(mockListUsers).toHaveBeenCalledWith(
+        BASE_URL + "/api/v1/users?page=0&size=3"
+      );
     });
     test("calls /api/v1/users?page=5&size=10 when corresponding params provided for listUsers", () => {
       const mockListUsers = jest.fn();
       axios.get = mockListUsers;
       apiCalls.listUsers({ page: 5, size: 10 });
-      expect(mockListUsers).toHaveBeenCalledWith(BASE_URL+
-        "/api/v1/users?page=5&size=10"
+      expect(mockListUsers).toHaveBeenCalledWith(
+        BASE_URL + "/api/v1/users?page=5&size=10"
       );
     });
     test("calls /api/v1/users?page=5&size=3 when only page param provided for listUsers", () => {
       const mockListUsers = jest.fn();
       axios.get = mockListUsers;
       apiCalls.listUsers({ page: 5 });
-      expect(mockListUsers).toHaveBeenCalledWith(BASE_URL+"/api/v1/users?page=5&size=3");
+      expect(mockListUsers).toHaveBeenCalledWith(
+        BASE_URL + "/api/v1/users?page=5&size=3"
+      );
     });
     test("calls /api/v1/users?page=0&size=5 when only size param provided for listUsers", () => {
       const mockListUsers = jest.fn();
       axios.get = mockListUsers;
       apiCalls.listUsers({ size: 5 });
-      expect(mockListUsers).toHaveBeenCalledWith(BASE_URL+"/api/v1/users?page=0&size=5");
+      expect(mockListUsers).toHaveBeenCalledWith(
+        BASE_URL + "/api/v1/users?page=0&size=5"
+      );
     });
   });
   describe("getUser", () => {
@@ -54,7 +60,9 @@ describe("apiCalls", () => {
       const mockGetUser = jest.fn();
       axios.get = mockGetUser;
       apiCalls.getUser("user5");
-      expect(mockGetUser).toHaveBeenCalledWith(BASE_URL+"/api/v1/users/user5");
+      expect(mockGetUser).toHaveBeenCalledWith(
+        BASE_URL + "/api/v1/users/user5"
+      );
     });
   });
   describe("updateUser", () => {
@@ -63,7 +71,7 @@ describe("apiCalls", () => {
       axios.put = mockUpdateUser;
       apiCalls.updateUser("5");
       const path = mockUpdateUser.mock.calls[0][0];
-      expect(path).toBe(BASE_URL+"/api/v1/users/5");
+      expect(path).toBe(BASE_URL + "/api/v1/users/5");
     });
   });
   describe("postPost", () => {
@@ -72,7 +80,7 @@ describe("apiCalls", () => {
       axios.post = mockPostPost;
       apiCalls.postPost();
       const path = mockPostPost.mock.calls[0][0];
-      expect(path).toBe(BASE_URL+"/api/v1/posts");
+      expect(path).toBe(BASE_URL + "/api/v1/posts");
     });
   });
   describe("loadPosts", () => {
@@ -80,16 +88,16 @@ describe("apiCalls", () => {
       const mockGetPosts = jest.fn();
       axios.get = mockGetPosts;
       apiCalls.loadPosts();
-      expect(mockGetPosts).toHaveBeenCalledWith(BASE_URL+
-        "/api/v1/posts?page=0&size=5&sort=id,desc"
+      expect(mockGetPosts).toHaveBeenCalledWith(
+        BASE_URL + "/api/v1/posts?page=0&size=5&sort=id,desc"
       );
     });
     test("calls /api/v1/users/user1/posts?page=0&size=5&sort=id,desc when user param provided", () => {
       const mockGetPosts = jest.fn();
       axios.get = mockGetPosts;
       apiCalls.loadPosts("user1");
-      expect(mockGetPosts).toHaveBeenCalledWith(BASE_URL+
-        "/api/v1/users/user1/posts?page=0&size=5&sort=id,desc"
+      expect(mockGetPosts).toHaveBeenCalledWith(
+        BASE_URL + "/api/v1/users/user1/posts?page=0&size=5&sort=id,desc"
       );
     });
   });
@@ -98,16 +106,17 @@ describe("apiCalls", () => {
       const mockGetPosts = jest.fn();
       axios.get = mockGetPosts;
       apiCalls.loadOldPosts(5);
-      expect(mockGetPosts).toHaveBeenCalledWith(BASE_URL+
-        "/api/v1/posts/5?direction=before&page=0&size=5&sort=id,desc"
+      expect(mockGetPosts).toHaveBeenCalledWith(
+        BASE_URL + "/api/v1/posts/5?direction=before&page=0&size=5&sort=id,desc"
       );
     });
     test("calls /api/v1/users/user3/posts/5?direction=before&page=0&size=5&sort=id,desc when post id and username param provided", () => {
       const mockGetPosts = jest.fn();
       axios.get = mockGetPosts;
       apiCalls.loadOldPosts(5, "user3");
-      expect(mockGetPosts).toHaveBeenCalledWith(BASE_URL+
-        "/api/v1/users/user3/posts/5?direction=before&page=0&size=5&sort=id,desc"
+      expect(mockGetPosts).toHaveBeenCalledWith(
+        BASE_URL +
+          "/api/v1/users/user3/posts/5?direction=before&page=0&size=5&sort=id,desc"
       );
     });
   });
@@ -116,16 +125,16 @@ describe("apiCalls", () => {
       const mockGetPosts = jest.fn();
       axios.get = mockGetPosts;
       apiCalls.loadNewPosts(5);
-      expect(mockGetPosts).toHaveBeenCalledWith(BASE_URL+
-        "/api/v1/posts/5?direction=after&sort=id,desc"
+      expect(mockGetPosts).toHaveBeenCalledWith(
+        BASE_URL + "/api/v1/posts/5?direction=after&sort=id,desc"
       );
     });
     test("calls /api/v1/users/user3/posts/5?direction=after&sort=id,desc when post id and username param provided", () => {
       const mockGetPosts = jest.fn();
       axios.get = mockGetPosts;
       apiCalls.loadNewPosts(5, "user3");
-      expect(mockGetPosts).toHaveBeenCalledWith(BASE_URL+
-        "/api/v1/users/user3/posts/5?direction=after&sort=id,desc"
+      expect(mockGetPosts).toHaveBeenCalledWith(
+        BASE_URL + "/api/v1/users/user3/posts/5?direction=after&sort=id,desc"
       );
     });
   });
@@ -134,16 +143,16 @@ describe("apiCalls", () => {
       const mockGetPosts = jest.fn();
       axios.get = mockGetPosts;
       apiCalls.loadNewPostCount(5);
-      expect(mockGetPosts).toHaveBeenCalledWith(BASE_URL+
-        "/api/v1/posts/5?direction=after&count=true"
+      expect(mockGetPosts).toHaveBeenCalledWith(
+        BASE_URL + "/api/v1/posts/5?direction=after&count=true"
       );
     });
     test("calls /api/v1/users/user3/posts/5?direction=after&count=true when post id and username param provided", () => {
       const mockGetPosts = jest.fn();
       axios.get = mockGetPosts;
       apiCalls.loadNewPostCount(5, "user3");
-      expect(mockGetPosts).toHaveBeenCalledWith(BASE_URL+
-        "/api/v1/users/user3/posts/5?direction=after&count=true"
+      expect(mockGetPosts).toHaveBeenCalledWith(
+        BASE_URL + "/api/v1/users/user3/posts/5?direction=after&count=true"
       );
     });
   });
@@ -153,7 +162,7 @@ describe("apiCalls", () => {
       axios.post = mockPostPostFile;
       apiCalls.postPostFile();
       const path = mockPostPostFile.mock.calls[0][0];
-      expect(path).toBe(BASE_URL+"/api/v1/posts/upload");
+      expect(path).toBe(BASE_URL + "/api/v1/posts/upload");
     });
   });
   describe("deletePost", () => {
@@ -162,9 +171,7 @@ describe("apiCalls", () => {
       axios.delete = mockDelete;
       apiCalls.deletePost(5);
       const path = mockDelete.mock.calls[0][0];
-      expect(path).toBe(BASE_URL+"/api/v1/posts/5");
+      expect(path).toBe(BASE_URL + "/api/v1/posts/5");
     });
   });
 });
-
-console.error = () => {};

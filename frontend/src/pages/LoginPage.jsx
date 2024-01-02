@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import Input from "../components/shared/Input";
-import ButtonWithProgress from "../components/shared/ButtonWithProgress";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import ButtonWithProgress from "../components/shared/ButtonWithProgress";
+import Input from "../components/shared/Input";
 import * as authActions from "../redux/authActions";
 
-const Login = (props) => {
+const LoginPage = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [apiError, setApiError] = useState(undefined);
@@ -83,7 +83,7 @@ const Login = (props) => {
   );
 };
 
-Login.defaultProps = {
+LoginPage.defaultProps = {
   actions: {
     postLogin: () =>
       new Promise((resolve, reject) => {
@@ -101,4 +101,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(LoginPage);

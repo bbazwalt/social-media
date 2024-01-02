@@ -12,13 +12,9 @@ import lombok.NoArgsConstructor;
 public class PostVM {
 
 	private long id;
-
 	private String content;
-
 	private long date;
-
 	private UserVM user;
-
 	private FileAttachmentVM attachment;
 
 	public PostVM(Post post) {

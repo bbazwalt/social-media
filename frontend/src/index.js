@@ -1,10 +1,9 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import App from "./containers/App";
-import { HashRouter } from "react-router-dom";
+import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
+import { HashRouter } from "react-router-dom";
+import App from "./containers/App";
 import configureStore from "./redux/configureStore";
 
 const store = configureStore();

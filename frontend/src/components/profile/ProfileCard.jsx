@@ -1,9 +1,8 @@
-import React from "react";
-import ProfileImageWithDefault from "./ProfileImageWithDefault";
-import Input from "../shared/Input";
-import ButtonWithProgress from "../shared/ButtonWithProgress";
-import { BsPencilFill } from "react-icons/bs";
 import { AiFillSave, AiOutlineClose } from "react-icons/ai";
+import { BsPencilFill } from "react-icons/bs";
+import ButtonWithProgress from "../shared/ButtonWithProgress";
+import Input from "../shared/Input";
+import ProfileImageWithDefault from "./ProfileImageWithDefault";
 
 const ProfileCard = (props) => {
   const { displayName, username, image } = props.user;

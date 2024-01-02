@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import * as apiCalls from "../../api/apiCalls";
 import Spinner from "../shared/Spinner";
-import PostView from "./PostView";
 import Modal from "./Modal";
+import PostView from "./PostView";
 
 const PostFeed = (props) => {
   const [page, setPage] = useState({ content: [] });
@@ -12,20 +12,23 @@ const PostFeed = (props) => {
   const [isDeletingPost, setDeletingPost] = useState(false);
   const [newPostCount, setNewPostCount] = useState(0);
   const [postToBeDeleted, setPostToBeDeleted] = useState();
-  const [noUserError,setNoUserError] = useState(false)
+  const [noUserError, setNoUserError] = useState(false);
 
   useEffect(() => {
     const loadPosts = () => {
       setLoadingPosts(true);
-      apiCalls.loadPosts(props.user).then((response) => {
-        setLoadingPosts(false);
-        setPage(response.data);
-        setNoUserError(false)
-      }).catch((error) => {
-        setLoadingPosts(false)
-        setPage({content:[]})
-        setNoUserError(true)
-      });
+      apiCalls
+        .loadPosts(props.user)
+        .then((response) => {
+          setLoadingPosts(false);
+          setPage(response.data);
+          setNoUserError(false);
+        })
+        .catch((error) => {
+          setLoadingPosts(false);
+          setPage({ content: [] });
+          setNoUserError(true);
+        });
     };
     loadPosts();
   }, [props.user]);
@@ -37,14 +40,17 @@ const PostFeed = (props) => {
       if (posts.length > 0) {
         topPostId = posts[0].id;
       }
-      apiCalls.loadNewPostCount(topPostId, props.user).then((response) => {
-        setNewPostCount(response.data.count);
-        setNoUserError(false)
-      }).catch((error)=>{
-        setLoadingNewPosts(false)
-        setPage({content:[]})
-        setNoUserError(true)
-      });
+      apiCalls
+        .loadNewPostCount(topPostId, props.user)
+        .then((response) => {
+          setNewPostCount(response.data.count);
+          setNoUserError(false);
+        })
+        .catch((error) => {
+          setLoadingNewPosts(false);
+          setPage({ content: [] });
+          setNoUserError(true);
+        });
     };
     const counter = setInterval(checkCount, 3000);
     return function cleanup() {
@@ -71,12 +77,12 @@ const PostFeed = (props) => {
           content: [...previousPage.content, ...response.data.content],
         }));
         setLoadingOldPosts(false);
-        setNoUserError(false)
+        setNoUserError(false);
       })
       .catch((error) => {
         setLoadingOldPosts(false);
-        setPage({content:[]})
-        setNoUserError(true)
+        setPage({ content: [] });
+        setNoUserError(true);
       });
   };
 
@@ -99,12 +105,12 @@ const PostFeed = (props) => {
         }));
         setLoadingNewPosts(false);
         setNewPostCount(0);
-        setNoUserError(false)
+        setNoUserError(false);
       })
       .catch((error) => {
         setLoadingNewPosts(false);
-        setPage({content:[]})
-        setNoUserError(true)
+        setPage({ content: [] });
+        setNoUserError(true);
       });
   };
 

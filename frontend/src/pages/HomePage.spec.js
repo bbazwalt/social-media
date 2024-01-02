@@ -1,10 +1,9 @@
 import { render, screen } from "@testing-library/react";
-import React from "react";
-import Home from "./Home";
-import * as apiCalls from "../api/apiCalls";
-import { legacy_createStore } from "redux";
 import { Provider } from "react-redux";
+import { legacy_createStore } from "redux";
+import * as apiCalls from "../api/apiCalls";
 import authReducer from "../redux/authReducer";
+import HomePage from "./HomePage";
 
 const defaultState = {
   id: 1,
@@ -21,7 +20,7 @@ const setup = (state = defaultState) => {
   store = legacy_createStore(authReducer, state);
   return render(
     <Provider store={store}>
-      <Home />
+      <HomePage />
     </Provider>
   );
 };

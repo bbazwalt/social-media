@@ -1,9 +1,8 @@
-import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
-import Login from "./Login";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
-import configureStore from "../redux/configureStore";
 import { MemoryRouter } from "react-router-dom";
+import configureStore from "../redux/configureStore";
+import LoginPage from "./LoginPage";
 
 const mockedNavigator = jest.fn();
 
@@ -17,7 +16,7 @@ const setup = () => {
   return render(
     <Provider store={store}>
       <MemoryRouter>
-        <Login />
+        <LoginPage />
       </MemoryRouter>
     </Provider>
   );
@@ -84,7 +83,7 @@ describe("LoginPage", () => {
       const view = render(
         <Provider store={store}>
           <MemoryRouter>
-            <Login {...props} />
+            <LoginPage {...props} />
           </MemoryRouter>
         </Provider>
       );
@@ -112,10 +111,34 @@ describe("LoginPage", () => {
       fireEvent.change(passwordInput, changeEvent("P4ssword"));
       expect(passwordInput).toHaveValue("P4ssword");
     });
+    // test("calls postLogin when the actions are provided in props and input fields have value", () => {
+    //   const actions = {
+    //     postLogin: jest.fn().mockResolvedValue({}),
+    //   };
+    //   setupForSubmit({ actions });
+    //   fireEvent.click(button);
+    //   expect(actions.postLogin).toHaveBeenCalledTimes(1);
+    // });
     test("does not throw exception when clicking the button when actions not provided in props", () => {
       setupForSubmit();
       expect(() => fireEvent.click(button)).not.toThrow();
     });
+
+    // test("calls postLogin with credentials in body", () => {
+    //   const actions = {
+    //     postLogin: jest.fn().mockResolvedValue({}),
+    //   };
+    //   setupForSubmit({ actions });
+    //   fireEvent.click(button);
+
+    //   const expectedUserObject = {
+    //     username: "my-user-name",
+    //     password: "P4ssword",
+    //   };
+
+    //   expect(actions.postLogin).toHaveBeenCalledWith(expectedUserObject);
+    // });
+
     test("enables the button when username and password is not empty", () => {
       setupForSubmit();
       expect(button).not.toBeDisabled();
@@ -130,6 +153,21 @@ describe("LoginPage", () => {
       fireEvent.change(passwordInput, changeEvent(""));
       expect(button).toBeDisabled();
     });
+    // test("displays alert when login fails", async () => {
+    //   const actions = {
+    //     postLogin: jest.fn().mockRejectedValue({
+    //       response: {
+    //         data: {
+    //           message: "Login failed",
+    //         },
+    //       },
+    //     }),
+    //   };
+    //   setupForSubmit({ actions });
+    //   fireEvent.click(button);
+    //   const alert = screen.queryByText("Login failed");
+    //   expect(alert).toBeInTheDocument();
+    // });
     test("clears alert when user changes username", async () => {
       const actions = {
         postLogin: jest.fn().mockRejectedValue({
@@ -164,6 +202,17 @@ describe("LoginPage", () => {
 
       expect(alert).not.toBeInTheDocument();
     });
+
+    // test("does not allow user to click the Login button when there is an ongoing api call", () => {
+    //   const actions = {
+    //     postLogin: mockAsyncDelayed(),
+    //   };
+    //   setupForSubmit({ actions });
+    //   fireEvent.click(button);
+    //   fireEvent.click(button);
+    //   expect(actions.postLogin).toHaveBeenCalledTimes(1);
+    // });
+
     test("displays spinner when there is an ongoing api call", () => {
       const actions = {
         postLogin: mockAsyncDelayed(),
@@ -174,6 +223,48 @@ describe("LoginPage", () => {
       const spinner = screen.queryByText("Loading...");
       expect(spinner).toBeInTheDocument();
     });
+
+    //     test("hides spinner after api call finishes successfully", async () => {
+    //       const actions = {
+    //         postLogin: mockAsyncDelayed(),
+    //       };
+    //       setupForSubmit({ actions });
+    //       fireEvent.click(button);
+
+    //       const spinner = screen.queryByText("Loading...");
+    //       await waitForElementToBeRemoved(spinner);
+    //       expect(spinner).not.toBeInTheDocument();
+    //     });
+    //     test("hides spinner after api call finishes with error", async () => {
+    //       const actions = {
+    //         postLogin: jest.fn().mockImplementation(() => {
+    //           return new Promise((resolve, reject) => {
+    //             setTimeout(() => {
+    //               reject({
+    //                 response: { data: {} },
+    //               });
+    //             }, 300);
+    //           });
+    //         }),
+    //       };
+    //       setupForSubmit({ actions });
+    //       fireEvent.click(button);
+
+    //       const spinner = screen.queryByText("Loading...");
+    //       await waitForElementToBeRemoved(spinner);
+    //       expect(spinner).not.toBeInTheDocument();
+    //     });
+    //     test("redirects to homePage after successful login", async () => {
+    //       const actions = {
+    //         postLogin: jest.fn().mockResolvedValue({}),
+    //       };
+    //       setupForSubmit({ actions });
+    //       fireEvent.click(button);
+    //       const spinner = screen.queryByText("Loading...");
+    //       await waitForElementToBeRemoved(spinner);
+    //       expect(mockedNavigator).toHaveBeenCalledWith("/");
+    //     });
   });
 });
+
 console.error = () => {};

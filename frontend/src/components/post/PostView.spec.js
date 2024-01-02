@@ -1,10 +1,9 @@
-import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
-import PostView from "./PostView";
-import { MemoryRouter } from "react-router-dom";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
+import { MemoryRouter } from "react-router-dom";
 import { legacy_createStore } from "redux";
 import authReducer from "../../redux/authReducer";
+import PostView from "./PostView";
 
 const loggedInStateUser1 = {
   id: 1,
@@ -143,5 +142,3 @@ describe("PostView", () => {
     });
   });
 });
-
-console.error = () => {};

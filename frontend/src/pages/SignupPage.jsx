@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import Input from "../components/shared/Input";
-import ButtonWithProgress from "../components/shared/ButtonWithProgress";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import ButtonWithProgress from "../components/shared/ButtonWithProgress";
+import Input from "../components/shared/Input";
 import * as authActions from "../redux/authActions";
 
-const Signup = (props) => {
+const SignupPage = (props) => {
   const [form, setForm] = useState({
     displayName: "",
     username: "",
@@ -132,7 +132,7 @@ const Signup = (props) => {
   );
 };
 
-Signup.defaultProps = {
+SignupPage.defaultProps = {
   actions: {
     postSignup: () =>
       new Promise((resolve, reject) => {
@@ -149,4 +149,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Signup);
+export default connect(null, mapDispatchToProps)(SignupPage);

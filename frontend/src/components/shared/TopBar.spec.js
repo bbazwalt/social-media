@@ -1,11 +1,10 @@
-import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
-import TopBar from "./TopBar";
+import { fireEvent, render, screen } from "@testing-library/react";
+import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router-dom";
-import authReducer from "../../redux/authReducer";
 import { legacy_createStore } from "redux";
 import * as authActions from "../../redux/authActions";
-import { Provider } from "react-redux";
+import authReducer from "../../redux/authReducer";
+import TopBar from "./TopBar";
 
 const loggedInState = {
   id: 1,
@@ -130,4 +129,5 @@ describe("TopBar", () => {
     });
   });
 });
+
 console.error = () => {};

@@ -1,10 +1,10 @@
-import React from "react";
+import { BASE_URL } from "../../api/baseURL";
 import defaultPicture from "../../assets/profile.png";
 
 const ProfileImageWithDefault = (props) => {
   let imageSource = defaultPicture;
   if (props.image) {
-    imageSource = `/images/profile/${props.image}`;
+    imageSource = BASE_URL + `/images/profile/${props.image}`;
   }
   return (
     //eslint-disable-next-line

@@ -1,5 +1,3 @@
-import React from "react";
-
 const Input = (props) => {
   let inputClassName = "form-control";
 
@@ -8,10 +6,9 @@ const Input = (props) => {
   }
   return (
     <div>
-      {props.label && <label htmlFor={props.label}>{props.label}</label>}
+      {props.label && <label htmlFor={props.name}>{props.label}</label>}
       <input
         name={props.name}
-        id={props.label}
         value={props.value}
         placeholder={props.placeholder}
         type={props.type || "text"}

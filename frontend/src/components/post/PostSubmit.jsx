@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import ProfileImageWithDefault from "../profile/ProfileImageWithDefault";
+import { useEffect, useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
 import { connect } from "react-redux";
 import * as apiCalls from "../../api/apiCalls";
+import ProfileImageWithDefault from "../profile/ProfileImageWithDefault";
 import ButtonWithProgress from "../shared/ButtonWithProgress";
 import Input from "../shared/Input";
-import { AiOutlineClose } from "react-icons/ai";
 
 const PostSubmit = (props) => {
   const [focused, setFocused] = useState(false);

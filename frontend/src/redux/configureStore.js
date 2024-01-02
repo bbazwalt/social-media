@@ -1,8 +1,8 @@
-import { legacy_createStore, applyMiddleware } from "redux";
-import authReducer from "./authReducer";
+import { applyMiddleware, legacy_createStore } from "redux";
 import logger from "redux-logger";
-import thunk from "redux-thunk";
+import {thunk} from "redux-thunk";
 import * as apiCalls from "../api/apiCalls";
+import authReducer from "./authReducer";
 
 const configureStore = (addLogger = true) => {
   let localStorageData = localStorage.getItem("social-media-auth");

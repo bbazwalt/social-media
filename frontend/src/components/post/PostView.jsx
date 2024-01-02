@@ -1,10 +1,11 @@
-import React, { useRef } from "react";
-import ProfileImageWithDefault from "../profile/ProfileImageWithDefault";
-import { format } from "timeago.js";
-import { Link } from "react-router-dom";
+import { useRef } from "react";
+import { FaTrash } from "react-icons/fa";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { format } from "timeago.js";
+import { BASE_URL } from "../../api/baseURL";
 import useClickTracker from "../../shared/useClickTracker";
-import {FaTrash} from "react-icons/fa"
+import ProfileImageWithDefault from "../profile/ProfileImageWithDefault";
 
 const PostView = (props) => {
   const actionArea = useRef();
@@ -33,7 +34,11 @@ const PostView = (props) => {
           image={image}
         />
         <div className="flex-fill m-auto pl-2">
-          <Link to={`/${username}`} aria-label="post-view" className="list-group-item-action">
+          <Link
+            to={`/${username}`}
+            aria-label="post-view"
+            className="list-group-item-action"
+          >
             <h6 className="d-inline">
               {displayName}@{username}
             </h6>
@@ -42,19 +47,22 @@ const PostView = (props) => {
           <span className="text-black-50">{relativeDate}</span>
         </div>
         {ownedByLoggedInUser && (
-          <div className="dropdown" >
+          <div className="dropdown">
             <span
               className="btn btn-sm btn-light dropdown-toggle"
               data-testid="post-actions"
               ref={actionArea}
-
             />
-            <div className={dropDownClass} data-testid="post-action-dropdown" style={ {"--bs-dropdown-min-width": "4.82rem"}} >
+            <div
+              className={dropDownClass}
+              data-testid="post-action-dropdown"
+              style={{ "--bs-dropdown-min-width": "4.82rem" }}
+            >
               <button
                 className="btn btn-outline-danger btn-sm"
                 onClick={onClickDelete}
               >
-                <FaTrash/> Delete
+                <FaTrash /> Delete
               </button>
             </div>
           </div>
@@ -65,7 +73,7 @@ const PostView = (props) => {
         <div className="pl-5">
           <img
             alt="attachment"
-            src={`/images/attachments/${post.attachment.name}`}
+            src={BASE_URL + `/images/attachments/${post.attachment.name}`}
             className="img-fluid"
           />
         </div>

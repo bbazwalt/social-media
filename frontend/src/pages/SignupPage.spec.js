@@ -1,19 +1,18 @@
-import React from "react";
 import {
   fireEvent,
   render,
   screen,
   waitForElementToBeRemoved,
 } from "@testing-library/react";
-import Signup from "./Signup";
-import configureStore from "../redux/configureStore";
 import { Provider } from "react-redux";
+import configureStore from "../redux/configureStore";
+import SignupPage from "./SignupPage";
 
 const setup = () => {
   const store = configureStore(false);
   return render(
     <Provider store={store}>
-      <Signup />
+      <SignupPage />
     </Provider>
   );
 };
@@ -105,7 +104,7 @@ describe("Signup", () => {
       const store = configureStore(false);
       const view = render(
         <Provider store={store}>
-          <Signup {...props} />
+          <SignupPage {...props} />
         </Provider>
       );
 
@@ -161,10 +160,51 @@ describe("Signup", () => {
       expect(passwordRepeat).toHaveValue("my-password");
     });
 
+    // test("calls postSignup when the fields are valid and the actions are provided in props", () => {
+    //   const actions = {
+    //     postSignup: jest.fn().mockResolvedValueOnce({}),
+    //   };
+
+    //   setupForSubmit({ actions });
+
+    //   fireEvent.click(button);
+    //   expect(actions.postSignup).toHaveBeenCalledTimes(1);
+    // });
+
     test("does not throw exception when clicking the button when actions not provided in props", () => {
       setupForSubmit();
       expect(() => fireEvent.click(button)).not.toThrow();
     });
+
+    // test("calls post with user body when the fields are valid", () => {
+    //   const actions = {
+    //     postSignup: jest.fn().mockResolvedValueOnce({}),
+    //   };
+
+    //   setupForSubmit({ actions });
+
+    //   fireEvent.click(button);
+
+    //   const expectedUserObject = {
+    //     username: "my-username",
+    //     displayName: "my-display-name",
+    //     password: "my-password",
+    //   };
+    //   expect(actions.postSignup).toHaveBeenCalledWith(expectedUserObject);
+    // });
+
+    // test("does not allow user to click the Sign Up button when there is an ongoing api call", () => {
+    //   const actions = {
+    //     postSignup: mockAsyncDelayed(),
+    //   };
+
+    //   setupForSubmit({ actions });
+
+    //   fireEvent.click(button);
+    //   fireEvent.click(button);
+
+    //   expect(actions.postSignup).toHaveBeenCalledTimes(1);
+    // });
 
     test("displays spinner when there is an ongoing api call", () => {
       const actions = {
@@ -207,6 +247,26 @@ describe("Signup", () => {
       expect(spinner).not.toBeInTheDocument();
     });
 
+    // test("displays validation error for displayName when error is received for the field", async () => {
+    //   const actions = {
+    //     postSignup: jest.fn().mockRejectedValue({
+    //       response: {
+    //         data: {
+    //           validationErrors: {
+    //             displayName: "Cannot be null",
+    //           },
+    //         },
+    //       },
+    //     }),
+    //   };
+    //   setupForSubmit({ actions });
+    //   fireEvent.click(button);
+
+    //   const errorMessage = await screen.findByText("Cannot be null");
+
+    //   expect(errorMessage).toBeInTheDocument();
+    // });
+
     test("enables the signup button when password and repeat password have same value", () => {
       setupForSubmit();
       expect(button).not.toBeDisabled();
@@ -237,6 +297,79 @@ describe("Signup", () => {
       const mismatchWarning = screen.getByText("Does not match to password");
       expect(mismatchWarning).toBeInTheDocument();
     });
+
+    // test("hides the validation error when user changes the content of displayName", async () => {
+    //   const actions = {
+    //     postSignup: jest.fn().mockRejectedValue({
+    //       response: {
+    //         data: {
+    //           validationErrors: {
+    //             displayName: "Cannot be null",
+    //           },
+    //         },
+    //       },
+    //     }),
+    //   };
+    //   setupForSubmit({ actions });
+    //   fireEvent.click(button);
+
+    //   const errorMessage = await screen.findByText("Cannot be null");
+    //   fireEvent.change(displayNameInput, changeEvent("name updated"));
+
+    //   expect(errorMessage).not.toBeInTheDocument();
+    // });
+
+    // test("hides the validation error when user changes the content of username", async () => {
+    //   const actions = {
+    //     postSignup: jest.fn().mockRejectedValue({
+    //       response: {
+    //         data: {
+    //           validationErrors: {
+    //             username: "Username cannot be null",
+    //           },
+    //         },
+    //       },
+    //     }),
+    //   };
+    //   setupForSubmit({ actions });
+    //   fireEvent.click(button);
+
+    //   const errorMessage = await screen.findByText("Username cannot be null");
+    //   fireEvent.change(usernameInput, changeEvent("name updated"));
+
+    //   await waitFor(() => {
+    //     expect(errorMessage).not.toBeInTheDocument();
+    //   });
+    // });
+    // test("hides the validation error when user changes the content of password", async () => {
+    //   const actions = {
+    //     postSignup: jest.fn().mockRejectedValue({
+    //       response: {
+    //         data: {
+    //           validationErrors: {
+    //             password: "Cannot be null",
+    //           },
+    //         },
+    //       },
+    //     }),
+    //   };
+    //   setupForSubmit({ actions });
+    //   fireEvent.click(button);
+    //   const errorMessage = await screen.findByText("Cannot be null");
+    //   fireEvent.change(passwordInput, changeEvent("updated-password"));
+    //   expect(errorMessage).not.toBeInTheDocument();
+    // });
+
+    // test("redirects to homePage after successful signup", async () => {
+    //   const actions = {
+    //     postSignup: jest.fn().mockResolvedValue({}),
+    //   };
+    //   setupForSubmit({ actions });
+    //   fireEvent.click(button);
+    //   await waitForElementToBeRemoved(() => screen.queryByText("Loading..."));
+    //   expect(mockedNavigator).toHaveBeenCalledWith("/");
+    // });
   });
 });
+
 console.error = () => {};

@@ -1,4 +1,3 @@
-import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import Input from "./Input";
 
@@ -82,5 +81,3 @@ describe("Layout", () => {
     expect(screen.queryByText("Cannot be null")).not.toBeInTheDocument();
   });
 });
-
-console.error = () => {};

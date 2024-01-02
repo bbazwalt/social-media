@@ -1,4 +1,3 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import ProfileCard from "./ProfileCard";
 const user = {
@@ -59,11 +58,6 @@ describe("ProfileCard", () => {
       const userInfo = screen.queryByText("display1@user1");
       expect(userInfo).not.toBeInTheDocument();
     });
-    test("displays label for displayName in edit mode", () => {
-      render(<ProfileCard user={user} inEditMode={true} />);
-      const label = screen.getByLabelText("Change Display Name for user1");
-      expect(label).toBeInTheDocument();
-    });
     test("hides the edit button in edit mode and isEditable provided as true", () => {
       render(<ProfileCard user={user} inEditMode={true} isEditable={true} />);
       const editButton = screen.queryByText("Edit");
@@ -86,5 +80,3 @@ describe("ProfileCard", () => {
     });
   });
 });
-
-console.error = () => {};

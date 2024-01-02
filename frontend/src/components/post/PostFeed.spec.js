@@ -1,17 +1,15 @@
-import React from "react";
 import {
-  render,
   fireEvent,
-  waitFor,
-  waitForElementToBeRemoved,
+  render,
   screen,
+  waitFor
 } from "@testing-library/react";
-import PostFeed from "./PostFeed";
-import * as apiCalls from "../../api/apiCalls";
-import { MemoryRouter } from "react-router-dom";
 import { Provider } from "react-redux";
+import { MemoryRouter } from "react-router-dom";
 import { legacy_createStore } from "redux";
+import * as apiCalls from "../../api/apiCalls";
 import authReducer from "../../redux/authReducer";
+import PostFeed from "./PostFeed";
 
 const loggedInStateUser1 = {
   id: 1,
@@ -527,6 +525,7 @@ describe("PostFeed", () => {
       expect(screen.queryByText("Loading...")).not.toBeInTheDocument();
       expect(screen.getByText("Load More")).toBeInTheDocument();
     });
+
     test("does not allow loadNewPosts to be called when there is an active api call about it", async () => {
       useFakeIntervals();
       apiCalls.loadPosts = jest
@@ -535,7 +534,7 @@ describe("PostFeed", () => {
       apiCalls.loadNewPostCount = jest
         .fn()
         .mockResolvedValue({ data: { count: 1 } });
-      apiCalls.loadNewPosts = jest 
+      apiCalls.loadNewPosts = jest
         .fn()
         .mockResolvedValue(mockSuccessGetNewPostsList);
       setup({ user: "user1" });

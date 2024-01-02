@@ -29,7 +29,7 @@ import org.springframework.http.client.support.BasicAuthenticationInterceptor;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.social.backend.configuration.AppConfiguration;
-import com.social.backend.error.ApiError;
+import com.social.backend.exception.ApiError;
 import com.social.backend.shared.GenericResponse;
 import com.social.backend.user.User;
 import com.social.backend.user.UserRepository;

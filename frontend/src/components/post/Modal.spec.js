@@ -1,5 +1,4 @@
-import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import Modal from "./Modal";
 
 describe("Modal", () => {
@@ -45,5 +44,3 @@ describe("Modal", () => {
     });
   });
 });
-
-console.error = () => {};

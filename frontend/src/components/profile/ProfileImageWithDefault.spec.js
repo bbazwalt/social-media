@@ -1,5 +1,4 @@
-import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import ProfileImageWithDefault from "./ProfileImageWithDefault";
 
 describe("ProfileImageWithDefault", () => {
@@ -32,4 +31,3 @@ describe("ProfileImageWithDefault", () => {
     });
   });
 });
-console.error = () => {};

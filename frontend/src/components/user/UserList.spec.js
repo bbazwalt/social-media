@@ -1,11 +1,10 @@
-import React from "react";
-import { render, fireEvent, waitFor, screen } from "@testing-library/react";
-import UserList from "./UserList";
-import * as apiCalls from "../../api/apiCalls";
-import { MemoryRouter } from "react-router-dom";
-import { listUsers } from "../../api/apiCalls";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
+import { MemoryRouter } from "react-router-dom";
+import * as apiCalls from "../../api/apiCalls";
+import { listUsers } from "../../api/apiCalls";
 import configureStore from "../../redux/configureStore";
+import UserList from "./UserList";
 
 apiCalls.listUsers = jest.fn().mockResolvedValue({
   data: {

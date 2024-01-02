@@ -1,7 +1,6 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import UserListItem from "./UserListItem";
 import { MemoryRouter } from "react-router-dom";
+import UserListItem from "./UserListItem";
 
 const user = {
   username: "user1",
@@ -38,4 +37,3 @@ describe("UserListItem", () => {
     expect(image.src).toContain("/images/profile/" + user.image);
   });
 });
-console.error = () => {};

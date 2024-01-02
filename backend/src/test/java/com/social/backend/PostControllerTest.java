@@ -29,7 +29,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.social.backend.configuration.AppConfiguration;
-import com.social.backend.error.ApiError;
+import com.social.backend.exception.ApiError;
 import com.social.backend.file.FileAttachment;
 import com.social.backend.file.FileAttachmentRepository;
 import com.social.backend.file.FileService;

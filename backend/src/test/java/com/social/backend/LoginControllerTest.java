@@ -18,7 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.support.BasicAuthenticationInterceptor;
 import org.springframework.test.context.ActiveProfiles;
 
-import com.social.backend.error.ApiError;
+import com.social.backend.exception.ApiError;
 import com.social.backend.user.User;
 import com.social.backend.user.UserRepository;
 import com.social.backend.user.UserService;

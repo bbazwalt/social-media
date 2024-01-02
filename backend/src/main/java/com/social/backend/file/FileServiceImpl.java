@@ -18,8 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.social.backend.configuration.AppConfiguration;
 
-import lombok.NoArgsConstructor;
-
 @Service
 @EnableScheduling
 public class FileServiceImpl implements FileService {
@@ -27,7 +25,6 @@ public class FileServiceImpl implements FileService {
 	AppConfiguration appConfiguration;
 
 	Tika tika;
-
 	
 	FileAttachmentRepository fileAttachmentRepository;
 

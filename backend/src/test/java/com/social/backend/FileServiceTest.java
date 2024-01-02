@@ -22,6 +22,7 @@ import com.social.backend.configuration.AppConfiguration;
 import com.social.backend.file.FileAttachment;
 import com.social.backend.file.FileAttachmentRepository;
 import com.social.backend.file.FileService;
+import com.social.backend.file.FileServiceImpl;
 
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
@@ -39,7 +40,7 @@ public class FileServiceTest {
 		appConfiguration = new AppConfiguration();
 		appConfiguration.setUploadPath("uploads-test");
 
-		fileService = new FileService(appConfiguration, fileAttachmentRepository);
+		fileService = new FileServiceImpl(appConfiguration, fileAttachmentRepository);
 
 		new File(appConfiguration.getUploadPath()).mkdir();
 		new File(appConfiguration.getFullProfileImagesPath()).mkdir();

@@ -1,11 +1,11 @@
-import React from "react";
-import defaultPicture from "../../assets/profile.png";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../../api/baseURL";
+import defaultPicture from "../../assets/profile.png";
 
 const UserListItem = (props) => {
   let imageSource = defaultPicture;
   if (props.user.image) {
-    imageSource = `/images/profile/${props.user.image}`;
+    imageSource = BASE_URL + `/images/profile/${props.user.image}`;
   }
 
   return (

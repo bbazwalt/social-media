@@ -5,12 +5,11 @@ import {
   waitFor,
   waitForElementToBeRemoved,
 } from "@testing-library/react";
-import React from "react";
-import User from "./User";
-import * as apiCalls from "../api/apiCalls";
 import axios from "axios";
 import { Provider } from "react-redux";
+import * as apiCalls from "../api/apiCalls";
 import configureStore from "../redux/configureStore";
+import UserPage from "./UserPage";
 
 apiCalls.loadPosts = jest.fn().mockResolvedValue({
   data: {
@@ -67,7 +66,7 @@ const setup = (props) => {
   store = configureStore(false);
   return render(
     <Provider store={store}>
-      <User {...props} />
+      <UserPage {...props} />
     </Provider>
   );
 };
