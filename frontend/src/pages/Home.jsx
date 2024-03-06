@@ -15,7 +15,7 @@ const Home = ({
 }) => {
   return (
     <div className="mx-auto max-w-[76rem]">
-      <Grid container xs={12} className="justify-between">
+      <Grid container className="justify-between">
         <Grid item lg={2.49} className="relative w-full">
           <Navigation />
         </Grid>

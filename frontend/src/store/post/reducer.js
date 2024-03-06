@@ -1,9 +1,3 @@
-import {
-  updateDeletedPosts,
-  updateLikedPosts,
-  updateRepliedPosts,
-  updateRepostedPosts,
-} from "../../utils/otherUtils";
 import { SIGN_OUT } from "../user/actionType";
 import {
   CLEAR_POST_ERROR,
@@ -93,12 +87,36 @@ export const postReducer = (state = initialState, { type, payload }) => {
         ...state,
         isLoading: false,
         error: null,
-        replyPosts: updateRepliedPosts(state.replyPosts, payload),
-        posts: updateRepliedPosts(state.posts, payload),
-        followingPosts: updateRepliedPosts(state.followingPosts, payload),
-        userPosts: updateRepliedPosts(state.userPosts, payload),
-        userReplyPosts: updateRepliedPosts(state.userReplyPosts, payload),
-        userLikedPosts: updateRepliedPosts(state.userLikedPosts, payload),
+        replyPosts: state.replyPosts.map((post) =>
+          post.id === payload.id
+            ? { ...post, totalReplies: payload.totalReplies }
+            : post,
+        ),
+        posts: state.posts.map((post) =>
+          post.id === payload.id
+            ? { ...post, totalReplies: payload.totalReplies }
+            : post,
+        ),
+        followingPosts: state.followingPosts.map((post) =>
+          post.id === payload.id
+            ? { ...post, totalReplies: payload.totalReplies }
+            : post,
+        ),
+        userPosts: state.userPosts.map((post) =>
+          post.id === payload.id
+            ? { ...post, totalReplies: payload.totalReplies }
+            : post,
+        ),
+        userReplyPosts: state.userReplyPosts.map((post) =>
+          post.id === payload.id
+            ? { ...post, totalReplies: payload.totalReplies }
+            : post,
+        ),
+        userLikedPosts: state.userLikedPosts.map((post) =>
+          post.id === payload.id
+            ? { ...post, totalReplies: payload.totalReplies }
+            : post,
+        ),
       };
     case FIND_POST_BY_ID_SUCCESS:
       return {
@@ -120,12 +138,60 @@ export const postReducer = (state = initialState, { type, payload }) => {
                 liked: payload.liked,
               }
             : state.post,
-        replyPosts: updateLikedPosts(state.replyPosts, payload),
-        posts: updateLikedPosts(state.posts, payload),
-        followingPosts: updateLikedPosts(state.followingPosts, payload),
-        userPosts: updateLikedPosts(state.userPosts, payload),
-        userReplyPosts: updateLikedPosts(state.userReplyPosts, payload),
-        userLikedPosts: updateLikedPosts(state.userLikedPosts, payload),
+        replyPosts: state.replyPosts.map((post) =>
+          post.id === payload.id
+            ? {
+                ...post,
+                totalLikes: payload.totalLikes,
+                liked: payload.liked,
+              }
+            : post,
+        ),
+        posts: state.posts.map((post) =>
+          post.id === payload.id
+            ? {
+                ...post,
+                totalLikes: payload.totalLikes,
+                liked: payload.liked,
+              }
+            : post,
+        ),
+        followingPosts: state.followingPosts.map((post) =>
+          post.id === payload.id
+            ? {
+                ...post,
+                totalLikes: payload.totalLikes,
+                liked: payload.liked,
+              }
+            : post,
+        ),
+        userPosts: state.userPosts.map((post) =>
+          post.id === payload.id
+            ? {
+                ...post,
+                totalLikes: payload.totalLikes,
+                liked: payload.liked,
+              }
+            : post,
+        ),
+        userReplyPosts: state.userReplyPosts.map((post) =>
+          post.id === payload.id
+            ? {
+                ...post,
+                totalLikes: payload.totalLikes,
+                liked: payload.liked,
+              }
+            : post,
+        ),
+        userLikedPosts: state.userLikedPosts.map((post) =>
+          post.id === payload.id
+            ? {
+                ...post,
+                totalLikes: payload.totalLikes,
+                liked: payload.liked,
+              }
+            : post,
+        ),
       };
     case REPOST_SUCCESS:
       return {
@@ -140,12 +206,60 @@ export const postReducer = (state = initialState, { type, payload }) => {
                 reposted: payload.reposted,
               }
             : state.post,
-        replyPosts: updateRepostedPosts(state.replyPosts, payload),
-        posts: updateRepostedPosts(state.posts, payload),
-        followingPosts: updateRepostedPosts(state.followingPosts, payload),
-        userPosts: updateRepostedPosts(state.userPosts, payload),
-        userReplyPosts: updateRepostedPosts(state.userReplyPosts, payload),
-        userLikedPosts: updateRepostedPosts(state.userLikedPosts, payload),
+        replyPosts: state.replyPosts.map((post) =>
+          post.id === payload.id
+            ? {
+                ...post,
+                totalReposts: payload.totalReposts,
+                reposted: payload.reposted,
+              }
+            : post,
+        ),
+        posts: state.posts.map((post) =>
+          post.id === payload.id
+            ? {
+                ...post,
+                totalReposts: payload.totalReposts,
+                reposted: payload.reposted,
+              }
+            : post,
+        ),
+        followingPosts: state.followingPosts.map((post) =>
+          post.id === payload.id
+            ? {
+                ...post,
+                totalReposts: payload.totalReposts,
+                reposted: payload.reposted,
+              }
+            : post,
+        ),
+        userPosts: state.userPosts.map((post) =>
+          post.id === payload.id
+            ? {
+                ...post,
+                totalReposts: payload.totalReposts,
+                reposted: payload.reposted,
+              }
+            : post,
+        ),
+        userReplyPosts: state.userReplyPosts.map((post) =>
+          post.id === payload.id
+            ? {
+                ...post,
+                totalReposts: payload.totalReposts,
+                reposted: payload.reposted,
+              }
+            : post,
+        ),
+        userLikedPosts: state.userLikedPosts.map((post) =>
+          post.id === payload.id
+            ? {
+                ...post,
+                totalReposts: payload.totalReposts,
+                reposted: payload.reposted,
+              }
+            : post,
+        ),
       };
     case DELETE_POST_SUCCESS:
       return {
@@ -156,13 +270,21 @@ export const postReducer = (state = initialState, { type, payload }) => {
           ...state.post,
           totalReplies: state.post.totalReplies - 1,
         },
-        replyPosts: updateDeletedPosts(state.replyPosts, payload),
-        posts: updateDeletedPosts(state.posts, payload),
-        followingPosts: updateDeletedPosts(state.followingPosts, payload),
-        userPosts: updateDeletedPosts(state.userPosts, payload),
-        userReplyPosts: updateDeletedPosts(state.userReplyPosts, payload),
-        userMediaPosts: updateDeletedPosts(state.userMediaPosts, payload),
-        userLikedPosts: updateDeletedPosts(state.userLikedPosts, payload),
+        replyPosts: state.replyPosts.filter((post) => post.id !== payload),
+        posts: state.posts.filter((post) => post.id !== payload),
+        followingPosts: state.followingPosts.filter(
+          (post) => post.id !== payload,
+        ),
+        userPosts: state.userPosts.filter((post) => post.id !== payload),
+        userReplyPosts: state.userReplyPosts.filter(
+          (post) => post.id !== payload,
+        ),
+        userMediaPosts: state.userMediaPosts.filter(
+          (post) => post.id !== payload,
+        ),
+        userLikedPosts: state.userLikedPosts.filter(
+          (post) => post.id !== payload,
+        ),
       };
     case FIND_ALL_REPLY_POSTS_BY_PARENT_POST_ID_SUCCESS:
       return {

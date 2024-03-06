@@ -94,39 +94,3 @@ export const formatCreatedAt = (date) => {
   const options = { year: "numeric", month: "long" };
   return date.toLocaleDateString("en-US", options);
 };
-
-export const updateRepliedPosts = (repliedPosts, payload) => {
-  return repliedPosts.map((post) =>
-    post.id === payload.id
-      ? { ...post, totalReplies: payload.totalReplies }
-      : post,
-  );
-};
-
-export const updateLikedPosts = (likedPosts, payload) => {
-  return likedPosts.map((post) =>
-    post.id === payload.id
-      ? {
-          ...post,
-          totalLikes: payload.totalLikes,
-          liked: payload.liked,
-        }
-      : post,
-  );
-};
-
-export const updateRepostedPosts = (repostedPosts, payload) => {
-  return repostedPosts.map((post) =>
-    post.id === payload.id
-      ? {
-          ...post,
-          totalReposts: payload.totalReposts,
-          reposted: payload.reposted,
-        }
-      : post,
-  );
-};
-
-export const updateDeletedPosts = (deletedPosts, payload) => {
-  return deletedPosts.filter((post) => post.id !== payload);
-};

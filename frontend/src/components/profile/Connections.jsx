@@ -119,7 +119,7 @@ const Connections = ({ isFollowing }) => {
           )
         ) : null}
         {tabValue === 1 ? (
-          findUser?.following?.length && !isLoading === 0 ? (
+          findUser?.following?.length === 0 && !isLoading ? (
             <EmptyItemsText content="users" />
           ) : (
             findUser?.following?.map((item) => (

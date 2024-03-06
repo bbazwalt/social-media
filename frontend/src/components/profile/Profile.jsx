@@ -1,4 +1,4 @@
-import { Avatar, Box, Tab, Tabs, Typography } from "@mui/material";
+import { Avatar, Box, Tab, Tabs } from "@mui/material";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -42,7 +42,7 @@ function CustomTabPanel(props) {
     >
       {value === index && (
         <Box>
-          <Typography>{children}</Typography>
+          <div>{children}</div>
         </Box>
       )}
     </div>
@@ -65,7 +65,6 @@ function a11yProps(index) {
 const Profile = () => {
   const params = useParams();
 
-  const [paramId, setParamId] = useState(params.id);
   const [value, setValue] = useState(0);
   const [showStickyFollowButton, setShowStickyFollowButton] = useState(false);
   const [openProfileModal, setOpenProfileModal] = useState(false);
@@ -97,20 +96,16 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
-    setParamId(params.id);
+    scrollToTop();
   }, [params.id]);
 
   useEffect(() => {
-    scrollToTop();
-  }, [paramId]);
-
-  useEffect(() => {
-    dispatch(findUserById(paramId, navigate));
-    dispatch(findAllUserPosts(paramId));
-    dispatch(findAllUserReplyPosts(paramId));
-    dispatch(findAllUserMediaPosts(paramId));
-    dispatch(findAllUserLikedPosts(paramId));
-  }, [paramId]);
+    dispatch(findUserById(params.id, navigate));
+    dispatch(findAllUserPosts(params.id));
+    dispatch(findAllUserReplyPosts(params.id));
+    dispatch(findAllUserMediaPosts(params.id));
+    dispatch(findAllUserLikedPosts(params.id));
+  }, [params.id]);
 
   const handleOpen = () => {
     setOpenProfileModal(true);
@@ -124,24 +119,16 @@ const Profile = () => {
     setValue(newValue);
   };
 
-  const handleLikeTab = () => {
-    dispatch(findAllUserLikedPosts(paramId));
-  };
-
-  const handlePostsTab = () => {
-    dispatch(findAllUserPosts(paramId));
-  };
-
   const handleFollowUser = () => {
-    dispatch(followUser(paramId));
+    dispatch(followUser(params.id));
   };
 
   const handleFollowers = () => {
-    navigate(`/profile/${paramId}/followers`);
+    navigate(`/profile/${params.id}/followers`);
   };
 
   const handleFollowing = () => {
-    navigate(`/profile/${paramId}/following`);
+    navigate(`/profile/${params.id}/following`);
   };
 
   return isLoading && !findUser ? (
@@ -193,13 +180,18 @@ const Profile = () => {
         )}
       </section>
       <section>
-        <img
-          className={`h-[12.5rem] w-[100%] cursor-pointer object-cover ${
-            !findUser?.coverPicture && "bg-[rgb(207,217,222)] "
-          }`}
-          src={`${findUser?.coverPicture ? findUser?.coverPicture : ""} `}
-          alt={findUser?.fullName}
-        />
+        {findUser?.coverPicture ? (
+          <img
+            className="h-[12.5rem] w-[100%] cursor-pointer object-cover"
+            src={findUser.coverPicture}
+            alt={findUser.fullName}
+          />
+        ) : (
+          <div
+            className="h-[12.5rem] w-[100%] bg-[rgb(207,217,222)]"
+            aria-label="No cover picture"
+          ></div>
+        )}
       </section>
       <section className="pl-4">
         <div className="mt-5 flex h-[5rem] items-start justify-between">
@@ -317,13 +309,7 @@ const Profile = () => {
             >
               {["Posts", "Replies", "Media", "Likes"].map((item, index) => (
                 <Tab
-                  onClick={
-                    item === "Posts"
-                      ? handlePostsTab
-                      : item === "Likes"
-                        ? handleLikeTab
-                        : null
-                  }
+                  key={index}
                   sx={{
                     flex: 1,
                     color: "gray",
@@ -347,14 +333,16 @@ const Profile = () => {
             {userPosts?.length === 0 && !isLoading ? (
               <EmptyItemsText content="posts" />
             ) : (
-              userPosts?.map((item) => <PostCard item={item} />)
+              userPosts?.map((item) => <PostCard key={item.id} item={item} />)
             )}
           </CustomTabPanel>
           <CustomTabPanel value={value} index={1}>
             {userReplyPosts?.length === 0 && !isLoading ? (
               <EmptyItemsText content="posts" />
             ) : (
-              userReplyPosts?.map((item) => <PostCard item={item} />)
+              userReplyPosts?.map((item) => (
+                <PostCard key={item.id} item={item} />
+              ))
             )}
           </CustomTabPanel>
           <CustomTabPanel value={value} index={2}>
@@ -378,7 +366,9 @@ const Profile = () => {
             {userLikedPosts?.length === 0 && !isLoading ? (
               <EmptyItemsText content="posts" />
             ) : (
-              userLikedPosts?.map((item) => <PostCard item={item} />)
+              userLikedPosts?.map((item) => (
+                <PostCard key={item.id} item={item} />
+              ))
             )}
           </CustomTabPanel>
         </Box>

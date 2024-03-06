@@ -26,8 +26,8 @@ public class UserServiceImpl implements UserService {
 	public User createUser(SignUpRequest signUpRequest) throws Exception {
 		String username = signUpRequest.getUsername();
 
-		User isUser = findUserByUsername(username);
-		if (isUser != null) {
+		Optional<User> isUser = userRepository.findByUsername(username);
+		if (isUser.isPresent()) {
 			throw new UserException("A user with the given username already exists.");
 		}
 		User createdUser = new User();
