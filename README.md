@@ -11,7 +11,7 @@ Social Media Web App • Live Link: https://azwalt-social-media.vercel.app/
 
 ## Sign In Page:
 
-![Alt text](https://github.com/bbazwalt/social-media/blob/main/screenshots/sign-in-page.png)
+![Sign In Page](https://github.com/bbazwalt/social-media/blob/main/screenshots/sign-in-page.png)
 
 ## Home:
 
