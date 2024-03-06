@@ -1,0 +1,29 @@
+@keyframes scaleUp {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes scaleDown {
+  from {
+    transform: scale(1.2);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.animate-scale-up {
+  animation: scaleUp 0.2s forwards;
+}
+
+.animate-scale-down {
+  animation: scaleDown 0.2s forwards;
+}
+
+.hover\:bg-zinc-100 {
+  transition: background-color 0.3s ease;
+}

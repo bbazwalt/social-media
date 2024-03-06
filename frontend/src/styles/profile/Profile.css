@@ -1,0 +1,37 @@
+.button-text::after {
+  content: "Following";
+}
+
+.button-hover:hover .button-text::after {
+  content: "Unfollow";
+  color: red;
+}
+
+.button-text-new::after {
+  content: "Follow";
+}
+
+.button-hover:hover .button-text-new::after {
+  content: "Follow";
+}
+.media-grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  margin: 4px;
+}
+
+.media-grid-item {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+}
+
+.media-grid-item img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
