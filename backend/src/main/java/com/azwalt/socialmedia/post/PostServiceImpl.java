@@ -54,6 +54,7 @@ public class PostServiceImpl implements PostService {
 		Post post = postRepository.findById(postId)
 				.orElseThrow(() -> new PostException("No post found with the given ID."));
 		post.setViews(post.getViews() + 1);
+		postRepository.save(post);
 		return post;
 	}
 
