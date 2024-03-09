@@ -12,7 +12,7 @@ const setAxiosToken = (token) => {
 };
 
 const deleteAxiosToken = () => {
-  delete axios.defaults.headers.common["REQUEST_HEADER"];
+  delete axios.defaults.headers.common[REQUEST_HEADER];
 };
 
 export const AuthProvider = ({ children }) => {
