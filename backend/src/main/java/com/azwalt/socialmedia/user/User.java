@@ -33,7 +33,7 @@ public class User {
 	private Long id;
 
 	@NotBlank(message = "{user.constraints.fullName.NotBlank.message}")
-	@Size(min = 1, max = 255, message = "{user.constraints.fullName.Size.message}")
+	@Size(max = 255, message = "{user.constraints.fullName.Size.message}")
 	private String fullName;
 
 	@NotBlank(message = "{user.constraints.username.NotBlank.message}")
@@ -46,17 +46,14 @@ public class User {
 	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "{user.constraints.password.Pattern.message}")
 	private String password;
 
+	@NotBlank(message = "{user.constraints.dateOfBirth.NotBlank.message}")
 	@AgeLimit(message = "{user.constraints.dateOfBirth.AgeLimit.message}")
 	private String dateOfBirth;
 
 	private String location;
-
 	private String website;
-
 	private String profilePicture;
-
 	private String coverPicture;
-
 	private String bio;
 
 	@JsonIgnore

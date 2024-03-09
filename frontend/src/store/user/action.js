@@ -63,7 +63,7 @@ export const signIn = (reqData, authSignIn) => async (dispatch) => {
   }
 };
 
-export const currentUser = (authSignOut) => async (dispatch) => {
+export const findReqUser = (authSignOut) => async (dispatch) => {
   dispatch({ type: FIND_USER_REQUEST });
   try {
     const { data } = await axios.get(`/users/profile`);
@@ -124,7 +124,7 @@ export const followUser = (userId) => async (dispatch) => {
 export const updateUser = (reqData) => async (dispatch) => {
   dispatch({ type: UPDATE_USER_REQUEST });
   try {
-    const { data } = await axios.put(`users`, reqData);
+    const { data } = await axios.put(`users/profile`, reqData);
     dispatch({ type: UPDATE_USER_SUCCESS, payload: data });
   } catch (error) {
     dispatch({

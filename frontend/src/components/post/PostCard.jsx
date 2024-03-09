@@ -7,7 +7,6 @@ import {
   postLikeIcon,
   postLikedIcon,
   postReplyIcon,
-  postViewsIcon,
   repostIcon,
   repostedIcon,
   threeDotsIcon,
@@ -158,62 +157,53 @@ const PostCard = ({ item, isDetails }) => {
               </div>
             )}
           </div>
-          <div onClick={handlePostClick} className={` ml-2 cursor-pointer`}>
-            <div>
-              <p className="mb-2 p-0 ">{item?.content}</p>
-            </div>
+          <div onClick={handlePostClick} className="ml-2 cursor-pointer">
+            <p className="mb-2 p-0">{item?.content}</p>
             {item?.image && (
               <img
-                className="max-h-[20rem] w-fit  max-w-[97%]  rounded-2xl border-gray-300"
+                className="max-h-[20rem] w-fit max-w-[97%] rounded-2xl border-gray-300"
                 src={item?.image}
                 alt=""
               />
             )}
           </div>
           <div className=" ml-2 mt-1 flex flex-wrap items-center justify-between pt-1">
-            <div className="flex items-center space-x-28 text-gray-600 ">
+            <div className="flex w-[97%] flex-row justify-between text-gray-600">
+              <div
+                ref={likeIconRef}
+                className={`flex cursor-pointer flex-row items-center hover:rounded-full hover:bg-gray-100 ${
+                  item?.liked && "animate-scale-down"
+                }`}
+                onClick={handleLikePost}
+              >
+                <span className="mt-[0.1rem]">
+                  {item?.liked ? postLikedIcon : postLikeIcon}
+                </span>
+                <div className="ml-[0.2rem]">
+                  {formatCount(item?.totalLikes)}
+                </div>
+              </div>
               <div
                 className="flex cursor-pointer flex-row items-center hover:rounded-full hover:bg-gray-100"
                 onClick={handleOpenReplyModal}
               >
-                {postReplyIcon}
-                <div style={{ fontSize: "0.8rem", marginLeft: "0.2rem" }}>
+                <span className="mt-1">{postReplyIcon}</span>
+                <div className="ml-[0.2rem]">
                   {formatCount(item?.totalReplies)}
                 </div>
               </div>
               <div
                 ref={repostIconRef}
                 className={`flex cursor-pointer flex-row items-center hover:rounded-full hover:bg-gray-100 ${
-                  item?.reposted ? "animate-scale-down" : ""
+                  item?.reposted && "animate-scale-down"
                 }`}
                 onClick={handleCreateRepost}
               >
-                {item?.reposted ? repostedIcon : repostIcon}
-                <div style={{ fontSize: "0.8rem", marginLeft: "0.2rem" }}>
+                <span className="mt-0.5">
+                  {item?.reposted ? repostedIcon : repostIcon}
+                </span>
+                <div className="ml-[0.2rem]">
                   {formatCount(item?.totalReposts)}
-                </div>
-              </div>
-              <div
-                ref={likeIconRef}
-                className={`flex cursor-pointer flex-row items-center hover:rounded-full hover:bg-gray-100 ${
-                  item?.liked ? "animate-scale-down" : ""
-                }`}
-                onClick={handleLikePost}
-              >
-                {item?.liked ? postLikedIcon : postLikeIcon}
-                <div style={{ fontSize: "0.8rem", marginLeft: "0.2rem" }}>
-                  {formatCount(item?.totalLikes)}
-                </div>
-              </div>
-              <div className="flex flex-row items-center hover:rounded-full hover:bg-gray-100">
-                {postViewsIcon}
-                <div
-                  style={{
-                    fontSize: "0.8rem",
-                    marginLeft: "0.2rem",
-                  }}
-                >
-                  {formatCount(item?.totalViews)}
                 </div>
               </div>
             </div>

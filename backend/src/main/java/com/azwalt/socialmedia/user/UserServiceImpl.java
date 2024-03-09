@@ -10,22 +10,18 @@ import org.springframework.stereotype.Service;
 
 import com.azwalt.socialmedia.auth.SignUpRequest;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-	private UserRepository userRepository;
-	private PasswordEncoder passwordEncoder;
-
-	public UserServiceImpl(UserRepository userRepository,
-			PasswordEncoder passwordEncoder) {
-		this.userRepository = userRepository;
-		this.passwordEncoder = passwordEncoder;
-	}
+	private final UserRepository userRepository;
+	private final PasswordEncoder passwordEncoder;
 
 	@Override
 	public User createUser(SignUpRequest signUpRequest) throws Exception {
 		String username = signUpRequest.getUsername();
-
 		Optional<User> isUser = userRepository.findByUsername(username);
 		if (isUser.isPresent()) {
 			throw new UserException("A user with the given username already exists.");
@@ -41,11 +37,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User findUserById(Long id) throws Exception {
-		Optional<User> opt = userRepository.findById(id);
-		if (opt.isPresent()) {
-			return opt.get();
-		}
-		throw new UserException("No user found with the given ID.");
+		return userRepository.findById(id)
+				.orElseThrow(() -> new UsernameNotFoundException("No user found with the given ID."));
 	}
 
 	@Override
@@ -73,7 +66,7 @@ public class UserServiceImpl implements UserService {
 			followToUser.getFollowers().add(user);
 		}
 		userRepository.save(followToUser);
-		userRepository.save(user);
+		userRepository.save(user); 
 		return user;
 	}
 

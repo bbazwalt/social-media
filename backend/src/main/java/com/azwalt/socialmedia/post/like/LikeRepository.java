@@ -8,4 +8,5 @@ public interface LikeRepository extends JpaRepository<Like, Long> {
 
 	@Query("SELECT l FROM Like l WHERE l.user.id=:userId AND l.post.id=:postId")
 	public Like isLikeExists(@Param("userId") Long userId, @Param("postId") Long postId);
+
 }

@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import com.azwalt.socialmedia.user.User;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
+
 	@Query("SELECT p FROM Post p WHERE p.replyFor IS NOT NULL AND p.replyFor.id = :parentPostId ORDER BY p.createdAt DESC")
 	public Set<Post> findAllReplyPostsByParentPostId(@Param("parentPostId") Long parentPostId);
 

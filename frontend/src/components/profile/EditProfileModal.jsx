@@ -4,11 +4,10 @@ import Modal from "@mui/material/Modal";
 import { useFormik } from "formik";
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { modalCloseIcon, updateDpIcon } from "../../data/icon/iconsData";
+import { modalCloseIcon, updatePictureIcon } from "../../data/icon/iconsData";
 import { blankProfilePicture } from "../../data/image/imagesData";
 import { updateUser } from "../../store/user/action";
 import { uploadToCloudinary } from "../../utils/uploadToCloudinary";
-import "./../../styles/profile/EditProfileModal.css";
 
 const style = {
   position: "absolute",
@@ -74,217 +73,197 @@ const EditProfileModal = ({ item, open, handleClose }) => {
   });
 
   return (
-    <div>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <form onSubmit={formik.handleSubmit}>
-            <div
-              className={`sticky z-50 flex h-[3.3rem] items-center justify-between rounded-t-3xl bg-[rgba(255,255,255,0.85)] pb-2 backdrop-blur-[12px]`}
-            >
-              <div className="flex items-center justify-center">
-                <div className="ml-2 mt-2 ">
-                  <div
-                    className="mt-1 cursor-pointer p-2 hover:rounded-full hover:bg-zinc-200"
-                    onClick={handleCloseModal}
-                  >
-                    {modalCloseIcon}
-                  </div>
-                </div>
-                <div className=" ml-4 pb-1">
-                  <div className="flex flex-row items-center justify-center">
-                    <h1 className=" ml-3 mt-3 text-xl font-bold opacity-90">
-                      Edit profile
-                    </h1>
-                  </div>
-                </div>
-              </div>
-              <button
-                onClick={formik.handleSubmit}
-                type="submit"
-                className={`button-hover mr-3 mt-3 h-8 rounded-full bg-black px-4 pb-0.5 pt-0 font-bold text-white hover:bg-neutral-600`}
+    <Modal
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box sx={style}>
+        <form onSubmit={formik.handleSubmit}>
+          <div className="sticky z-50 flex h-[3.3rem] items-center justify-between rounded-t-3xl bg-[rgba(255,255,255,0.85)] pb-2 backdrop-blur-[12px]">
+            <div className="flex items-center justify-center">
+              <div
+                className="ml-1 mt-3 cursor-pointer p-2 hover:rounded-full hover:bg-zinc-200"
+                onClick={handleCloseModal}
               >
-                <span>Save</span>
-              </button>
+                {modalCloseIcon}
+              </div>
+              <h1 className=" ml-7 mt-3 pb-1 text-xl font-bold opacity-90">
+                Edit profile
+              </h1>
             </div>
-            <div className="hideScrollBar h-[80vh] overflow-x-hidden overflow-y-scroll ">
-              <div>
-                <div className="w-full">
-                  <div className="relative">
-                    <img
-                      className={`h-[12.2rem] w-full border-2 border-white object-cover object-center ${
-                        !formik.values.coverPicture && "bg-[#b2b2b2] "
-                      }`}
-                      src={`${
-                        formik.values.coverPicture
-                          ? formik.values.coverPicture
-                          : ""
-                      } `}
-                      alt=""
-                    />
-                    <input
-                      type="file"
-                      id="backgroundImageInput"
-                      className="absolute left-0 top-0 h-full w-full opacity-0 "
-                      onChange={handleImageChange}
-                      name="coverPicture"
-                      style={{ display: "none" }}
-                    />
-                    <div
-                      onClick={() =>
-                        document.getElementById("backgroundImageInput").click()
-                      }
-                      className=" ml-[16.8rem] h-[2.7rem] w-[2.7rem] -translate-y-[7.5rem] cursor-pointer rounded-full bg-black p-2.5 opacity-60 hover:bg-gray-900"
-                    >
-                      {updateDpIcon}
+            <button
+              onClick={formik.handleSubmit}
+              type="submit"
+              className="button-hover mr-3 mt-3 h-8 rounded-full bg-black px-4 pb-0.5 pt-0 font-bold text-white hover:bg-neutral-600"
+            >
+              Save
+            </button>
+          </div>
+          <div className="h-[80vh] overflow-x-hidden overflow-y-scroll ">
+            <div>
+              <div className="relative w-full">
+                <img
+                  className={`h-[12.2rem] w-full border-2 border-white object-cover object-center ${
+                    !formik.values.coverPicture && "bg-[#b2b2b2] "
+                  }`}
+                  src={`${
+                    formik.values.coverPicture ? formik.values.coverPicture : ""
+                  } `}
+                  alt=""
+                />
+                <input
+                  type="file"
+                  id="backgroundImageInput"
+                  className="absolute left-0 top-0 hidden h-full w-full opacity-0 "
+                  onChange={handleImageChange}
+                  name="coverPicture"
+                />
+                <div
+                  onClick={() =>
+                    document.getElementById("backgroundImageInput").click()
+                  }
+                  className=" ml-[16.8rem] h-[2.7rem] w-[2.7rem] -translate-y-[7.5rem] cursor-pointer rounded-full bg-black p-2.5 opacity-60 hover:bg-gray-900"
+                >
+                  {updatePictureIcon}
+                </div>
+              </div>
+              <div className="ml-4 h-[2rem] w-full -translate-y-[5.5rem]">
+                <div className="relative">
+                  <Avatar
+                    sx={{
+                      width: "7.5rem",
+                      height: "7.5rem",
+                      border: "4px solid white",
+                    }}
+                    src={`${
+                      formik.values.profilePicture
+                        ? formik.values.profilePicture
+                        : blankProfilePicture
+                    } `}
+                  />
+                  {isuploading && (
+                    <div className="absolute -translate-y-12 translate-x-44 text-xl font-medium">
+                      Please wait. Uploading...
                     </div>
-                  </div>
+                  )}
+                  <input
+                    type="file"
+                    id="imageInput"
+                    className="absolute left-0 top-0 hidden h-full w-full opacity-0 "
+                    onChange={handleImageChange}
+                    name="profilePicture"
+                  />
                 </div>
-                <div className="ml-4 h-[2rem] w-full -translate-y-[5.5rem]">
-                  <div className="relative">
-                    <Avatar
-                      sx={{
-                        width: "7.5rem",
-                        height: "7.5rem",
-                        border: "4px solid white",
-                      }}
-                      src={`${
-                        formik.values.profilePicture
-                          ? formik.values.profilePicture
-                          : blankProfilePicture
-                      } `}
-                    />
-                    {isuploading && (
-                      <div className="absolute -translate-y-12 translate-x-44 text-xl font-medium">
-                        Please wait. Uploading...
-                      </div>
-                    )}
-                    <input
-                      type="file"
-                      id="imageInput"
-                      className="absolute left-0 top-0 h-full w-full opacity-0 "
-                      onChange={handleImageChange}
-                      name="profilePicture"
-                      style={{ display: "none" }}
-                    />
-                  </div>
-                  <div
-                    onClick={() =>
-                      document.getElementById("imageInput").click()
-                    }
-                    className=" ml-[2.4rem] h-[2.7rem] w-[2.7rem] -translate-y-[5.2rem] cursor-pointer rounded-full bg-black p-2.5 opacity-60 hover:bg-gray-900"
-                  >
-                    {updateDpIcon}
-                  </div>
+                <div
+                  onClick={() => document.getElementById("imageInput").click()}
+                  className=" ml-[2.4rem] h-[2.7rem] w-[2.7rem] -translate-y-[5.2rem] cursor-pointer rounded-full bg-black p-2.5 opacity-60 hover:bg-gray-900"
+                >
+                  {updatePictureIcon}
                 </div>
-              </div>
-              <div className="mt-3 space-y-6" style={{ padding: "0 16px" }}>
-                <TextField
-                  inputRef={fullNameRef}
-                  onFocus={() => scrollToView(fullNameRef)}
-                  fullWidth
-                  id="fullName"
-                  name="fullName"
-                  label="Full Name"
-                  value={formik.values.fullName}
-                  onChange={formik.handleChange}
-                  error={
-                    formik.touched.fullName && Boolean(formik.errors.fullName)
-                  }
-                  helperText={formik.touched.fullName && formik.errors.fullName}
-                  sx={{
-                    "& label.Mui-focused": {
-                      color: "rgb(29,155,240)",
-                    },
-                    "& .MuiOutlinedInput-root": {
-                      "&.Mui-focused fieldset": {
-                        borderColor: "rgb(29,155,240)",
-                      },
-                    },
-                  }}
-                />
-                <TextField
-                  inputRef={bioRef}
-                  onFocus={() => scrollToView(bioRef)}
-                  fullWidth
-                  id="bio"
-                  multiline
-                  rows={4}
-                  name="bio"
-                  label="Bio"
-                  value={formik.values.bio}
-                  onChange={formik.handleChange}
-                  error={formik.touched.bio && Boolean(formik.errors.bio)}
-                  helperText={formik.touched.bio && formik.errors.bio}
-                  sx={{
-                    "& label.Mui-focused": {
-                      color: "rgb(29,155,240)",
-                    },
-                    "& .MuiOutlinedInput-root": {
-                      "&.Mui-focused fieldset": {
-                        borderColor: "rgb(29,155,240)",
-                      },
-                    },
-                  }}
-                />
-                <TextField
-                  inputRef={locationRef}
-                  onFocus={() => scrollToView(locationRef)}
-                  fullWidth
-                  id="location"
-                  name="location"
-                  label="Location"
-                  value={formik.values.location}
-                  onChange={formik.handleChange}
-                  error={
-                    formik.touched.location && Boolean(formik.errors.location)
-                  }
-                  helperText={formik.touched.location && formik.errors.location}
-                  sx={{
-                    "& label.Mui-focused": {
-                      color: "rgb(29,155,240)",
-                    },
-                    "& .MuiOutlinedInput-root": {
-                      "&.Mui-focused fieldset": {
-                        borderColor: "rgb(29,155,240)",
-                      },
-                    },
-                  }}
-                />
-                <TextField
-                  inputRef={websiteRef}
-                  onFocus={() => scrollToView(websiteRef)}
-                  fullWidth
-                  id="website"
-                  name="website"
-                  label="Website"
-                  value={formik.values.website}
-                  onChange={formik.handleChange}
-                  error={
-                    formik.touched.website && Boolean(formik.errors.website)
-                  }
-                  helperText={formik.touched.website && formik.errors.website}
-                  sx={{
-                    "& label.Mui-focused": {
-                      color: "rgb(29,155,240)",
-                    },
-                    "& .MuiOutlinedInput-root": {
-                      "&.Mui-focused fieldset": {
-                        borderColor: "rgb(29,155,240)",
-                      },
-                    },
-                  }}
-                />
               </div>
             </div>
-          </form>
-        </Box>
-      </Modal>
-    </div>
+            <div className="mt-3 space-y-6 px-4">
+              <TextField
+                inputRef={fullNameRef}
+                onFocus={() => scrollToView(fullNameRef)}
+                fullWidth
+                id="fullName"
+                name="fullName"
+                label="Full Name"
+                value={formik.values.fullName}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.fullName && Boolean(formik.errors.fullName)
+                }
+                helperText={formik.touched.fullName && formik.errors.fullName}
+                sx={{
+                  "& label.Mui-focused": {
+                    color: "rgb(29,155,240)",
+                  },
+                  "& .MuiOutlinedInput-root": {
+                    "&.Mui-focused fieldset": {
+                      borderColor: "rgb(29,155,240)",
+                    },
+                  },
+                }}
+              />
+              <TextField
+                inputRef={bioRef}
+                onFocus={() => scrollToView(bioRef)}
+                fullWidth
+                id="bio"
+                multiline
+                rows={4}
+                name="bio"
+                label="Bio"
+                value={formik.values.bio}
+                onChange={formik.handleChange}
+                error={formik.touched.bio && Boolean(formik.errors.bio)}
+                helperText={formik.touched.bio && formik.errors.bio}
+                sx={{
+                  "& label.Mui-focused": {
+                    color: "rgb(29,155,240)",
+                  },
+                  "& .MuiOutlinedInput-root": {
+                    "&.Mui-focused fieldset": {
+                      borderColor: "rgb(29,155,240)",
+                    },
+                  },
+                }}
+              />
+              <TextField
+                inputRef={locationRef}
+                onFocus={() => scrollToView(locationRef)}
+                fullWidth
+                id="location"
+                name="location"
+                label="Location"
+                value={formik.values.location}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.location && Boolean(formik.errors.location)
+                }
+                helperText={formik.touched.location && formik.errors.location}
+                sx={{
+                  "& label.Mui-focused": {
+                    color: "rgb(29,155,240)",
+                  },
+                  "& .MuiOutlinedInput-root": {
+                    "&.Mui-focused fieldset": {
+                      borderColor: "rgb(29,155,240)",
+                    },
+                  },
+                }}
+              />
+              <TextField
+                inputRef={websiteRef}
+                onFocus={() => scrollToView(websiteRef)}
+                fullWidth
+                id="website"
+                name="website"
+                label="Website"
+                value={formik.values.website}
+                onChange={formik.handleChange}
+                error={formik.touched.website && Boolean(formik.errors.website)}
+                helperText={formik.touched.website && formik.errors.website}
+                sx={{
+                  "& label.Mui-focused": {
+                    color: "rgb(29,155,240)",
+                  },
+                  "& .MuiOutlinedInput-root": {
+                    "&.Mui-focused fieldset": {
+                      borderColor: "rgb(29,155,240)",
+                    },
+                  },
+                }}
+              />
+            </div>
+          </div>
+        </form>
+      </Box>
+    </Modal>
   );
 };
 

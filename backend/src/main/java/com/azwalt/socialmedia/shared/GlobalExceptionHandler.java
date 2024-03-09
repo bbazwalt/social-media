@@ -70,15 +70,6 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiErrorResponse);
 	}
 
-	@ExceptionHandler(IllegalArgumentException.class)
-	public ResponseEntity<ApiResponse> illegalArgumentExceptionHandler(
-			IllegalArgumentException illegalArgumentException, WebRequest webRequest) {
-		logger.error("IllegalArgumentException: {}", webRequest.getDescription(true), illegalArgumentException);
-		ApiResponse apiErrorResponse = new ApiResponse(illegalArgumentException.getMessage(),
-				false);
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiErrorResponse);
-	}
-
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ApiResponse> handleValidationExceptions(
 			MethodArgumentNotValidException methodArgumentNotValidException, WebRequest webRequest) {

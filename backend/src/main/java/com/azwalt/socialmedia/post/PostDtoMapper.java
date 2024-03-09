@@ -3,16 +3,29 @@ package com.azwalt.socialmedia.post;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.springframework.stereotype.Component;
+
 import com.azwalt.socialmedia.user.User;
 import com.azwalt.socialmedia.user.UserDto;
 import com.azwalt.socialmedia.user.UserDtoMapper;
+import com.azwalt.socialmedia.user.UserUtil;
 
+import lombok.RequiredArgsConstructor;
+
+@Component
+@RequiredArgsConstructor
 public class PostDtoMapper {
 
-	public static PostDto toPostDto(Post post, User reqUser) {
-		UserDto user = UserDtoMapper.toUserDto(post.getUser());
-		boolean isLiked = PostUtil.isLikedByReqUser(reqUser, post);
-		boolean isReposted = PostUtil.isRepostedByReqUser(reqUser, post);
+	private final UserDtoMapper userDtoMapper;
+	private final UserUtil userUtil;
+	private final PostUtil postUtil;
+
+	public PostDto toPostDto(Post post, User reqUser) {
+		UserDto user = userDtoMapper.toUserDto(post.getUser(), false);
+		user.setReqUser(userUtil.isReqUser(reqUser, post.getUser()));
+		user.setFollowed(userUtil.isFollowedByReqUser(reqUser, post.getUser()));
+		boolean isLiked = postUtil.isLikedByReqUser(reqUser, post);
+		boolean isReposted = postUtil.isRepostedByReqUser(reqUser, post);
 		Set<Long> repostedUserIds = new LinkedHashSet<>();
 		for (User repostedUser : post.getRepostedUsers()) {
 			repostedUserIds.add(repostedUser.getId());
@@ -25,7 +38,6 @@ public class PostDtoMapper {
 		postDto.setTotalLikes(post.getLikes().size());
 		postDto.setTotalReplies(post.getReplyPosts().size());
 		postDto.setTotalReposts(post.getRepostedUsers().size());
-		postDto.setTotalViews(post.getViews());
 		postDto.setUser(user);
 		postDto.setLiked(isLiked);
 		postDto.setReposted(isReposted);
@@ -38,11 +50,10 @@ public class PostDtoMapper {
 		return postDto;
 	}
 
-	public static Set<PostDto> toPostDtos(Set<Post> posts, User reqUser) {
+	public Set<PostDto> toPostDtos(Set<Post> posts, User reqUser) {
 		Set<PostDto> postsDtos = new LinkedHashSet<>();
 		for (Post post : posts) {
-			PostDto postDto = toPostDto(post, reqUser);
-			postsDtos.add(postDto);
+			postsDtos.add(toPostDto(post, reqUser));
 		}
 		return postsDtos;
 	}

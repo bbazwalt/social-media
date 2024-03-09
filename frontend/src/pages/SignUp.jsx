@@ -1,9 +1,9 @@
-import { Button, Grid, TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { format } from "date-fns";
-import { Formik, useFormik } from "formik";
+import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
@@ -72,106 +72,80 @@ const SignUp = () => {
       onClick={handleOnClick}
       className="flex min-h-screen flex-col items-center justify-center bg-gray-100"
     >
-      <div>
-        <h1 className="my-4 text-center text-3xl font-semibold">Sign Up</h1>
-      </div>
+      <h1 className="my-4 text-center text-3xl font-semibold">Sign Up</h1>
       <div className=" min-h-full w-[30%]  min-w-[30rem] rounded-md bg-white p-10 px-8 pb-6 shadow-md">
         <form onSubmit={formik.handleSubmit} className="space-y-4">
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                label="Name"
-                name="fullName"
-                variant="outlined"
-                size="large"
-                value={formik.values.fullName}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={
-                  formik.touched.fullName && Boolean(formik.errors.fullName)
-                }
-                helperText={formik.touched.fullName && formik.errors.fullName}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                label="Username"
-                name="username"
-                variant="outlined"
-                size="large"
-                value={formik.values.username}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={
-                  formik.touched.username && Boolean(formik.errors.username)
-                }
-                helperText={formik.touched.username && formik.errors.username}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                label="Password"
-                name="password"
-                type="password"
-                variant="outlined"
-                size="large"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={
-                  formik.touched.password && Boolean(formik.errors.password)
-                }
-                helperText={formik.touched.password && formik.errors.password}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Formik>
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <DatePicker
-                    required
-                    sx={{ width: "100%" }}
-                    maxDate={new Date()}
-                    label="Date of Birth"
-                    format="yyyy/MM/dd"
-                    name="dateOfBirth"
-                    value={formik.values.dateOfBirth}
-                    onChange={(value) => {
-                      formik.setFieldValue("dateOfBirth", value);
-                    }}
-                    views={["year", "month", "day"]}
-                    renderInput={(params) => (
-                      <div>
-                        <TextField {...params} />
-                      </div>
-                    )}
-                  />
-                </LocalizationProvider>
-              </Formik>
-              {formik.touched.dateOfBirth && formik.errors.dateOfBirth && (
-                <div className="ml-3 mt-1 text-[.8rem] text-red-500">
-                  {formik.errors.dateOfBirth}
-                </div>
-              )}
-            </Grid>
-            <Grid item xs={12}>
-              <Button
-                disabled={isLoading}
-                fullWidth
-                type="submit"
-                variant="contained"
-                size="large"
-                sx={{ padding: ".8rem 0" }}
-              >
-                SIGN UP
-              </Button>
-            </Grid>
-          </Grid>
+          <TextField
+            required
+            fullWidth
+            label="Name"
+            name="fullName"
+            variant="outlined"
+            size="large"
+            value={formik.values.fullName}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.fullName && Boolean(formik.errors.fullName)}
+            helperText={formik.touched.fullName && formik.errors.fullName}
+          />
+          <TextField
+            required
+            fullWidth
+            label="Username"
+            name="username"
+            variant="outlined"
+            size="large"
+            value={formik.values.username}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.username && Boolean(formik.errors.username)}
+            helperText={formik.touched.username && formik.errors.username}
+          />
+          <TextField
+            required
+            fullWidth
+            label="Password"
+            name="password"
+            type="password"
+            variant="outlined"
+            size="large"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
+          />
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DatePicker
+              required
+              sx={{ width: "100%" }}
+              maxDate={new Date()}
+              label="Date of Birth"
+              format="yyyy/MM/dd"
+              name="dateOfBirth"
+              value={formik.values.dateOfBirth}
+              onChange={(value) => {
+                formik.setFieldValue("dateOfBirth", value);
+              }}
+              views={["year", "month", "day"]}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
+          {formik.touched.dateOfBirth && formik.errors.dateOfBirth && (
+            <div className="ml-3 text-[.8rem] text-red-500">
+              {formik.errors.dateOfBirth}
+            </div>
+          )}
+          <Button
+            disabled={isLoading}
+            fullWidth
+            type="submit"
+            variant="contained"
+            size="large"
+            sx={{ padding: ".8rem 0" }}
+          >
+            SIGN UP
+          </Button>
         </form>
         {error && (
           <div className="mt-3 text-center">

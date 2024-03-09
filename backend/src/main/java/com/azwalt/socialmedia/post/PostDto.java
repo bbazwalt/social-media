@@ -1,6 +1,7 @@
 package com.azwalt.socialmedia.post;
 
 import java.time.Instant;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import com.azwalt.socialmedia.user.UserDto;
@@ -22,11 +23,11 @@ public class PostDto {
 	private int totalLikes;
 	private int totalReplies;
 	private int totalReposts;
-	private Long totalViews;
 	private boolean isLiked;
 	private boolean isReposted;
 	private boolean isReplyPost;
 	private Long replyFor;
-	private Set<Long> repostedUserIds;
-	private Set<PostDto> replyPosts;
+	private Set<Long> repostedUserIds = new LinkedHashSet<>();
+	private Set<PostDto> replyPosts = new LinkedHashSet<>();
+	
 }

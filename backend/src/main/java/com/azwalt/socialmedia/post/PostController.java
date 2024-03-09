@@ -1,6 +1,5 @@
 package com.azwalt.socialmedia.post;
 
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.springframework.http.HttpStatus;
@@ -23,96 +22,82 @@ import com.azwalt.socialmedia.user.UserUtil;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import lombok.RequiredArgsConstructor;
 
-@Validated
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(ApiConstants.BASE_API_PATH + "/posts")
+@Validated
 public class PostController {
 
-	private PostService postService;
-	private UserService userService;
-
-	public PostController(PostService postService, UserService userService) {
-		this.postService = postService;
-		this.userService = userService;
-	}
+	private final PostService postService;
+	private final UserService userService;
+	private final PostDtoMapper postDtoMapper;
+	private final UserUtil userUtil;
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public PostDto createPost(@RequestBody @NotNull @Valid CreatePostRequest createPostRequest)
-			throws Exception {
-		User user = UserUtil.getCurrentUser();
-		Post post = postService.createPost(createPostRequest, user);
-		PostDto postDto = PostDtoMapper.toPostDto(post, user);
-		return postDto;
+	public PostDto createPost(@RequestBody @NotNull @Valid CreatePostRequest createPostRequest) throws Exception {
+		User reqUser = userUtil.getCurrentUser();
+		Post post = postService.createPost(createPostRequest, reqUser);
+		return postDtoMapper.toPostDto(post, reqUser);
 	}
 
 	@PostMapping("/reply")
 	@ResponseStatus(HttpStatus.CREATED)
 	public PostDto createReplyPost(@RequestBody @NotNull @Valid CreateReplyPostRequest createReplyPostRequest)
 			throws Exception {
-		User user = UserUtil.getCurrentUser();
-		Post post = postService.createReplyPost(createReplyPostRequest, user);
-		PostDto postDto = PostDtoMapper.toPostDto(post, user);
-		return postDto;
+		User reqUser = userUtil.getCurrentUser();
+		Post post = postService.createReplyPost(createReplyPostRequest, reqUser);
+		return postDtoMapper.toPostDto(post, reqUser);
 	}
 
 	@GetMapping("/{postId}")
 	@ResponseStatus(HttpStatus.OK)
-	public PostDto findPostById(@PathVariable @NotNull Long postId)
-			throws Exception {
-		User user = UserUtil.getCurrentUser();
+	public PostDto findPostById(@PathVariable @NotNull Long postId) throws Exception {
+		User reqUser = userUtil.getCurrentUser();
 		Post post = postService.findPostById(postId);
-		PostDto postDto = PostDtoMapper.toPostDto(post, user);
-		return postDto;
+		return postDtoMapper.toPostDto(post, reqUser);
 	}
 
 	@PutMapping("/{postId}/repost")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public PostDto repost(@PathVariable @NotNull Long postId)
-			throws Exception {
-		User user = UserUtil.getCurrentUser();
-		Post post = postService.repost(postId, user);
-		PostDto postDto = PostDtoMapper.toPostDto(post, user);
-		return postDto;
+	public PostDto repost(@PathVariable @NotNull Long postId) throws Exception {
+		User reqUser = userUtil.getCurrentUser();
+		Post post = postService.repost(postId, reqUser);
+		return postDtoMapper.toPostDto(post, reqUser);
 	}
 
 	@DeleteMapping("/{postId}")
 	@ResponseStatus(HttpStatus.OK)
 	public ApiResponse deletePostById(@PathVariable @NotNull Long postId) throws Exception {
-		User user = UserUtil.getCurrentUser();
-		postService.deletePostById(postId, user.getId());
+		User reqUser = userUtil.getCurrentUser();
+		postService.deletePostById(postId, reqUser.getId());
 		return new ApiResponse("Post deleted successfully.", true);
 	}
 
 	@GetMapping("/reply/{parentPostId}")
 	@ResponseStatus(HttpStatus.OK)
-	public Set<PostDto> findAllReplyPostsByParentPostId(@PathVariable @NotNull Long parentPostId)
-			throws Exception {
+	public Set<PostDto> findAllReplyPostsByParentPostId(@PathVariable @NotNull Long parentPostId) throws Exception {
 		Set<Post> posts = postService.findAllReplyPostsByParentPostId(parentPostId);
-		User reqUser = UserUtil.getCurrentUser();
-		Set<PostDto> postDtos = PostDtoMapper.toPostDtos(new LinkedHashSet<Post>(posts), reqUser);
-		return postDtos;
+		User reqUser = userUtil.getCurrentUser();
+		return postDtoMapper.toPostDtos(posts, reqUser);
 	}
 
 	@GetMapping("/user")
 	@ResponseStatus(HttpStatus.OK)
-	public Set<PostDto> findAllFollowingUserPosts()
-			throws Exception {
-		User user = UserUtil.getCurrentUser();
-		Set<Post> posts = postService.findAllFollowingUserPosts(user.getId());
-		Set<PostDto> postDtos = PostDtoMapper.toPostDtos(new LinkedHashSet<Post>(posts), user);
-		return postDtos;
+	public Set<PostDto> findAllFollowingUserPosts() throws Exception {
+		User reqUser = userUtil.getCurrentUser();
+		Set<Post> posts = postService.findAllFollowingUserPosts(reqUser.getId());
+		return postDtoMapper.toPostDtos(posts, reqUser);
 	}
 
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
-	public Set<PostDto> findAllPosts()
-			throws Exception {
-		User user = UserUtil.getCurrentUser();
+	public Set<PostDto> findAllPosts() throws Exception {
+		User user = userUtil.getCurrentUser();
 		Set<Post> posts = postService.findAllPosts();
-		Set<PostDto> postDtos = PostDtoMapper.toPostDtos(new LinkedHashSet<Post>(posts), user);
-		return postDtos;
+		return postDtoMapper.toPostDtos(posts, user);
 	}
 
 	@GetMapping("/user/{userId}")
@@ -120,9 +105,8 @@ public class PostController {
 	public Set<PostDto> findAllUserPosts(@PathVariable @NotNull Long userId) throws Exception {
 		User user = userService.findUserById(userId);
 		Set<Post> posts = postService.findAllUserPosts(user);
-		User reqUser = UserUtil.getCurrentUser();
-		Set<PostDto> postDtos = PostDtoMapper.toPostDtos(new LinkedHashSet<Post>(posts), reqUser);
-		return postDtos;
+		User reqUser = userUtil.getCurrentUser();
+		return postDtoMapper.toPostDtos(posts, reqUser);
 	}
 
 	@GetMapping("/user/replies/{userId}")
@@ -130,9 +114,8 @@ public class PostController {
 	public Set<PostDto> findAllUserReplyPosts(@PathVariable @NotNull Long userId) throws Exception {
 		User user = userService.findUserById(userId);
 		Set<Post> posts = postService.findAllUserReplyPosts(user);
-		User reqUser = UserUtil.getCurrentUser();
-		Set<PostDto> postDtos = PostDtoMapper.toPostDtos(new LinkedHashSet<Post>(posts), reqUser);
-		return postDtos;
+		User reqUser = userUtil.getCurrentUser();
+		return postDtoMapper.toPostDtos(posts, reqUser);
 	}
 
 	@GetMapping("/user/media/{userId}")
@@ -140,9 +123,8 @@ public class PostController {
 	public Set<PostDto> findAllUserMediaPosts(@PathVariable @NotNull Long userId) throws Exception {
 		User user = userService.findUserById(userId);
 		Set<Post> posts = postService.findAllUserMediaPosts(user);
-		User reqUser = UserUtil.getCurrentUser();
-		Set<PostDto> postDtos = PostDtoMapper.toPostDtos(new LinkedHashSet<Post>(posts), reqUser);
-		return postDtos;
+		User reqUser = userUtil.getCurrentUser();
+		return postDtoMapper.toPostDtos(posts, reqUser);
 	}
 
 	@GetMapping("/user/{userId}/likes")
@@ -150,9 +132,8 @@ public class PostController {
 	public Set<PostDto> findAllUserLikedPosts(@PathVariable @NotNull Long userId) throws Exception {
 		User user = userService.findUserById(userId);
 		Set<Post> posts = postService.findAllUserLikedPosts(user.getId());
-		User reqUser = UserUtil.getCurrentUser();
-		Set<PostDto> postDtos = PostDtoMapper.toPostDtos(new LinkedHashSet<Post>(posts), reqUser);
-		return postDtos;
+		User reqUser = userUtil.getCurrentUser();
+		return postDtoMapper.toPostDtos(posts, reqUser);
 	}
 
 }

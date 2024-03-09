@@ -32,4 +32,5 @@ public class UserDto {
 	private Set<UserDto> following = new LinkedHashSet<>();
 	private Set<UserDto> followers = new LinkedHashSet<>();
 	private boolean isFollowed;
+
 }

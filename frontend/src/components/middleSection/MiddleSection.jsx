@@ -98,96 +98,90 @@ const MiddleSection = () => {
 
   return (
     <div className="space-y-5  ">
-      <section className={`-mb-2 mt-2`}>
-        <div className="flex">
-          <Avatar
-            className="ml-4 cursor-pointer"
-            src={user?.profilePicture || blankProfilePicture}
-            onClick={() => navigate(`/profile/${user?.id}`)}
+      <section className="-mb-2 mt-2 flex">
+        <Avatar
+          className="ml-4 cursor-pointer"
+          src={user?.profilePicture || blankProfilePicture}
+          onClick={() => navigate(`/profile/${user?.id}`)}
+        />
+        <form className="ml-3 w-full " onSubmit={formik.handleSubmit}>
+          <textarea
+            type="text"
+            name="content"
+            rows="2"
+            placeholder="Write a post"
+            className="w-full resize-none border-none  bg-transparent pr-7 text-xl outline-none"
+            {...formik.getFieldProps("content")}
           />
-          <div className="ml-3 w-full ">
-            <form onSubmit={formik.handleSubmit}>
-              <div>
-                <textarea
-                  type="text"
-                  name="content"
-                  rows="1"
-                  placeholder="Write a post"
-                  className={`w-full resize-none border-none  bg-transparent pr-7 text-xl outline-none`}
-                  {...formik.getFieldProps("content")}
-                />
-                {formik.errors.content && formik.touched.content && (
-                  <span className="text-red-500">{formik.errors.content}</span>
-                )}
-              </div>
-              {uploadingImage && <LoadingText content="Uploading..." />}
+          {formik.errors.content && formik.touched.content && (
+            <span className="text-red-500">{formik.errors.content}</span>
+          )}
+          {uploadingImage && <LoadingText content="Uploading..." />}
+          {selectedImage && (
+            <div className="-mb-8 mr-4 mt-4">
               {selectedImage && (
-                <div className="-mb-8 mr-4 mt-4">
-                  {selectedImage && (
-                    <div>
-                      <img
-                        className="h-[25rem] w-[35rem] rounded-2xl object-cover"
-                        src={selectedImage}
-                        alt=""
-                      />
-                      <div
-                        onClick={() => setSelectedImage(null)}
-                        className=" h-[2rem] w-[2rem] -translate-y-[24.7rem] translate-x-[29.7rem] cursor-pointer  rounded-full bg-black opacity-60  hover:bg-gray-900"
-                      >
-                        <div className="ml-1.5 pt-1.5"> {imgCloseIcon}</div>
-                      </div>
-                    </div>
-                  )}
+                <div>
+                  <img
+                    className="h-[25rem] w-[35rem] rounded-2xl object-cover"
+                    src={selectedImage}
+                    alt=""
+                  />
+                  <div
+                    onClick={() => setSelectedImage(null)}
+                    className=" h-[2rem] w-[2rem] -translate-y-[24.7rem] translate-x-[29.7rem] cursor-pointer  rounded-full bg-black opacity-60  hover:bg-gray-900"
+                  >
+                    <div className="ml-1.5 pt-1.5"> {imgCloseIcon}</div>
+                  </div>
                 </div>
               )}
-              <div className="mt-5 flex items-center justify-between">
-                <div className="flex items-center space-x-5">
-                  <label className="flex cursor-pointer items-center space-x-2 rounded-md">
-                    {postImageIcon}
-                    <input
-                      type="file"
-                      name="imageFile"
-                      className="hidden"
-                      onChange={handleSelectImage}
-                    />
-                  </label>
-                </div>
-                <div className="pr-3">
-                  <Button
-                    variant="contained"
-                    type="submit"
-                    disabled={!formik.values.content}
-                    sx={{
-                      fontSize: "1rem",
-                      textTransform: "capitalize",
-                      width: "100%",
-                      borderRadius: "29px",
-                      fontWeight: "bold",
-                      boxShadow: "none",
-                      ":hover": {
-                        boxShadow: "none",
-                      },
-                      "&.Mui-disabled": {
-                        color: "white",
-                        cursor: "not-allowed !important",
-                        pointerEvents: "all !important",
-                        fontWeight: "bold",
-                      },
-                    }}
-                  >
-                    Post
-                  </Button>
-                </div>
-              </div>
-            </form>
+            </div>
+          )}
+          <div className="mt-5 flex items-center justify-between">
+            <div className="flex items-center space-x-5">
+              <label className="flex cursor-pointer items-center space-x-2 rounded-md">
+                {postImageIcon}
+                <input
+                  type="file"
+                  name="imageFile"
+                  className="hidden"
+                  onChange={handleSelectImage}
+                />
+              </label>
+            </div>
+            <div className="pr-3">
+              <Button
+                variant="contained"
+                type="submit"
+                disabled={!formik.values.content}
+                sx={{
+                  fontSize: "1rem",
+                  textTransform: "capitalize",
+                  width: "100%",
+                  borderRadius: "29px",
+                  fontWeight: "bold",
+                  boxShadow: "none",
+                  ":hover": {
+                    boxShadow: "none",
+                  },
+                  "&.Mui-disabled": {
+                    color: "white",
+                    cursor: "not-allowed !important",
+                    pointerEvents: "all !important",
+                    fontWeight: "bold",
+                  },
+                }}
+              >
+                Post
+              </Button>
+            </div>
           </div>
-        </div>
+        </form>
       </section>
       <section>
         {isLoading && posts?.length === 0 ? (
           <LoadingText />
         ) : (
-          <div className=" border-t">
+          <div className="border-t">
             <Tabs
               aria-label="basic tabs example"
               scrollButtons="auto"

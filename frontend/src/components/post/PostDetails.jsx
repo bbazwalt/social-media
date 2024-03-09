@@ -35,9 +35,7 @@ const PostDetails = () => {
         <LoadingText />
       ) : (
         <div>
-          <section
-            className={`sticky top-0 z-50 flex items-center justify-between bg-[rgba(255,255,255,0.85)] pb-2  pt-1 backdrop-blur-[12px]`}
-          >
+          <section className="sticky top-0 z-50 flex items-center justify-between bg-[rgba(255,255,255,0.85)] pb-2  pt-1 backdrop-blur-[12px]">
             <div className="flex items-center">
               <span
                 className="ml-1.5 mt-1 h-9 w-9 cursor-pointer p-2 pl-2 hover:rounded-full hover:bg-zinc-200"

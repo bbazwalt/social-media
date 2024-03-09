@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class SignUpRequest {
 
 	@NotBlank(message = "{user.constraints.fullName.NotBlank.message}")
-	@Size(min = 1, max = 255)
+	@Size(max = 255, message = "{user.constraints.fullName.Size.message}")
 	private String fullName;
 
 	@NotBlank(message = "{user.constraints.username.NotBlank.message}")
@@ -23,10 +23,11 @@ public class SignUpRequest {
 	private String username;
 
 	@NotBlank(message = "{user.constraints.password.NotBlank.message}")
-	@Size(min = 8, max = 255)
+	@Size(min = 8, max = 255, message = "{user.constraints.password.Size.message}")
 	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "{user.constraints.password.Pattern.message}")
 	private String password;
 
+	@NotBlank(message = "{user.constraints.dateOfBirth.NotBlank.message}")
 	@AgeLimit(message = "{user.constraints.dateOfBirth.AgeLimit.message}")
 	private String dateOfBirth;
 

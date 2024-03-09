@@ -8,6 +8,20 @@ import EmptyItemsText from "../infoText/EmptyItemsText";
 import LoadingText from "../infoText/LoadingText";
 import UserCard from "./UserCard";
 
+const tabStyle = {
+  flex: 1,
+  color: "gray",
+  fontSize: "16px",
+  textTransform: "capitalize",
+  fontWeight: "bold",
+  "&.Mui-selected": {
+    color: "black",
+  },
+  "&:hover": {
+    backgroundColor: "rgba(128, 128, 128, 0.2)",
+  },
+};
+
 const Connections = ({ isFollowing }) => {
   const [tabValue, setTabValue] = useState(isFollowing ? 1 : 0);
 
@@ -35,9 +49,7 @@ const Connections = ({ isFollowing }) => {
     <LoadingText />
   ) : (
     <div className=" w-[100%] ">
-      <section
-        className={`sticky top-0 z-50 flex items-center justify-between bg-[rgba(255,255,255,0.85)] backdrop-blur-[12px]`}
-      >
+      <section className="sticky top-0 z-50 flex items-center justify-between bg-[rgba(255,255,255,0.85)] backdrop-blur-[12px]">
         <div className="flex items-center">
           <span
             className="-mt-1 ml-2 h-9 w-9 cursor-pointer p-2 pl-2 hover:rounded-full hover:bg-zinc-200"
@@ -51,10 +63,7 @@ const Connections = ({ isFollowing }) => {
                 {findUser?.fullName}
               </h1>
             </div>
-            <p
-              className=" text-gray-600 opacity-90 "
-              style={{ fontSize: "13px", fontWeight: "400" }}
-            >
+            <p className=" text-base font-normal text-gray-600 opacity-90 ">
               @{findUser?.username}
             </p>
           </div>
@@ -76,38 +85,8 @@ const Connections = ({ isFollowing }) => {
           onChange={handleTabChange}
           centered
         >
-          <Tab
-            sx={{
-              flex: 1,
-              color: "gray",
-              fontSize: "16px",
-              textTransform: "capitalize",
-              fontWeight: "bold",
-              "&.Mui-selected": {
-                color: "black",
-              },
-              "&:hover": {
-                backgroundColor: "rgba(128, 128, 128, 0.2)",
-              },
-            }}
-            label="Followers"
-          />
-          <Tab
-            sx={{
-              flex: 1,
-              color: "gray",
-              fontSize: "16px",
-              textTransform: "capitalize",
-              fontWeight: "bold",
-              "&.Mui-selected": {
-                color: "black",
-              },
-              "&:hover": {
-                backgroundColor: "rgba(128, 128, 128, 0.2)",
-              },
-            }}
-            label="Following"
-          />
+          <Tab sx={tabStyle} label="Followers" />
+          <Tab sx={tabStyle} label="Following" />
         </Tabs>
         {tabValue === 0 ? (
           findUser?.followers?.length === 0 && !isLoading ? (

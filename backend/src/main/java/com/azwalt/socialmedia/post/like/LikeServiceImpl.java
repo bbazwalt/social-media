@@ -8,21 +8,16 @@ import com.azwalt.socialmedia.post.PostService;
 import com.azwalt.socialmedia.user.User;
 import com.azwalt.socialmedia.user.UserRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class LikeServiceImpl implements LikeService {
 
-	private LikeRepository likeRepository;
-	private PostService postService;
-	private PostRepository postRepository;
-	private UserRepository userRepository;
-
-	public LikeServiceImpl(LikeRepository likeRepository, PostService postService, PostRepository postRepository,
-			UserRepository userRepository) {
-		this.likeRepository = likeRepository;
-		this.postService = postService;
-		this.postRepository = postRepository;
-		this.userRepository = userRepository;
-	}
+	private final LikeRepository likeRepository;
+	private final PostService postService;
+	private final PostRepository postRepository;
+	private final UserRepository userRepository;
 
 	@Override
 	public Like likePost(Long postId, User user) throws Exception {
@@ -33,7 +28,6 @@ public class LikeServiceImpl implements LikeService {
 			likeRepository.deleteById(isLikeExists.getId());
 			Post post = postService.findPostById(postId);
 			post.getLikes().remove(isLikeExists);
-			post.setViews(post.getViews() - 1);
 			postRepository.save(post);
 			return isLikeExists;
 		}
@@ -45,7 +39,6 @@ public class LikeServiceImpl implements LikeService {
 		user.getLikes().add(savedLike);
 		userRepository.save(user);
 		post.getLikes().add(savedLike);
-		post.setViews(post.getViews() - 1);
 		postRepository.save(post);
 		return savedLike;
 	}

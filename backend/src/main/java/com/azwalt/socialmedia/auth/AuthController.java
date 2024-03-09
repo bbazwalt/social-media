@@ -20,41 +20,33 @@ import com.azwalt.socialmedia.user.UserService;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import lombok.RequiredArgsConstructor;
 
-@Validated
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/auth")
+@Validated
 public class AuthController {
 
-	private PasswordEncoder passwordEncoder;
-	private TokenProvider tokenProvider;
-	private CustomUserService customUserService;
-	private UserService userService;
-
-	public AuthController(PasswordEncoder passwordEncoder, TokenProvider tokenProvider,
-			CustomUserService customUserService, UserService userService) {
-		this.passwordEncoder = passwordEncoder;
-		this.tokenProvider = tokenProvider;
-		this.customUserService = customUserService;
-		this.userService = userService;
-	}
+	private final TokenProvider tokenProvider;
+	private final PasswordEncoder passwordEncoder;
+	private final CustomUserService customUserService;
+	private final UserService userService;
 
 	@PostMapping("/signup")
 	@ResponseStatus(HttpStatus.CREATED)
-	public AuthResponse signUp(@RequestBody @NotNull @Valid SignUpRequest signUpRequest) throws Exception {
-		userService.createUser(signUpRequest);
-		Authentication authentication = new UsernamePasswordAuthenticationToken(signUpRequest.getUsername(),
-				signUpRequest.getPassword());
+	public AuthResponse signUp(@RequestBody @NotNull @Valid SignUpRequest signupRequest) throws Exception {
+		userService.createUser(signupRequest);
+		Authentication authentication = authenticate(signupRequest.getUsername(), signupRequest.getPassword());
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String token = tokenProvider.generateToken(authentication);
 		return new AuthResponse(token, "Sign up successfull.");
-
 	}
 
 	@PostMapping("/signin")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public AuthResponse signIn(@RequestBody @NotNull @Valid SignInRequest signInRequest) {
-		Authentication authentication = authenticate(signInRequest.getUsername(), signInRequest.getPassword());
+	public AuthResponse signIn(@RequestBody @NotNull @Valid SignInRequest signinRequest) throws Exception {
+		Authentication authentication = authenticate(signinRequest.getUsername(), signinRequest.getPassword());
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String token = tokenProvider.generateToken(authentication);
 		return new AuthResponse(token, "Sign in successfull.");

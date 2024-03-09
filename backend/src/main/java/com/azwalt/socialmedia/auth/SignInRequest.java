@@ -20,4 +20,5 @@ public class SignInRequest {
 	@Size(min = 8, max = 255, message = "{user.constraints.password.Size.message}")
 	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "{user.constraints.password.Pattern.message}")
 	private String password;
+	
 }

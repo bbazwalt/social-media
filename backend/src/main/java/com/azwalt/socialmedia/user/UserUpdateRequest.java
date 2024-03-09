@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class UserUpdateRequest {
 
 	@NotBlank(message = "{user.constraints.fullName.NotBlank.message}")
-	@Size(min = 1, max = 255)
+	@Size(max = 255, message = "{user.constraints.fullName.Size.message}")
 	private String fullName;
 
 	private String location;

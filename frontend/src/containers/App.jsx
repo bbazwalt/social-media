@@ -16,74 +16,72 @@ const App = () => {
   };
 
   return (
-    <div>
-      <Routes>
-        <Route
-          path="/signin"
-          element={
-            <RedirectToHomeOrAuth>
-              <SignIn />
-            </RedirectToHomeOrAuth>
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <RedirectToHomeOrAuth>
-              <SignUp />
-            </RedirectToHomeOrAuth>
-          }
-        />
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <Home isMiddleSection={true} />
-            </PrivateRoute>
-          }
-        ></Route>
-        <Route
-          path="/profile/:id"
-          element={
-            <PrivateRoute>
-              <Home isProfile={true} />
-            </PrivateRoute>
-          }
-        ></Route>
-        <Route
-          path={"/profile/:id/following"}
-          element={
-            <PrivateRoute>
-              <Home isConnections={true} isFollowing={true} />
-            </PrivateRoute>
-          }
-        ></Route>
-        <Route
-          path={"/profile/:id/followers"}
-          element={
-            <PrivateRoute>
-              <Home isConnections={true} isFollowing={false} />
-            </PrivateRoute>
-          }
-        ></Route>
-        <Route
-          path="/post/:id"
-          element={
-            <PrivateRoute>
-              <Home isPost={true} />
-            </PrivateRoute>
-          }
-        ></Route>
-        <Route
-          path="*"
-          element={
-            <PrivateRoute>
-              <Navigate to="/" replace />
-            </PrivateRoute>
-          }
-        />
-      </Routes>
-    </div>
+    <Routes>
+      <Route
+        path="/signin"
+        element={
+          <RedirectToHomeOrAuth>
+            <SignIn />
+          </RedirectToHomeOrAuth>
+        }
+      />
+      <Route
+        path="/signup"
+        element={
+          <RedirectToHomeOrAuth>
+            <SignUp />
+          </RedirectToHomeOrAuth>
+        }
+      />
+      <Route
+        path="/"
+        element={
+          <PrivateRoute>
+            <Home isMiddleSection={true} />
+          </PrivateRoute>
+        }
+      ></Route>
+      <Route
+        path="/profile/:id"
+        element={
+          <PrivateRoute>
+            <Home isProfile={true} />
+          </PrivateRoute>
+        }
+      ></Route>
+      <Route
+        path={"/profile/:id/following"}
+        element={
+          <PrivateRoute>
+            <Home isConnections={true} isFollowing={true} />
+          </PrivateRoute>
+        }
+      ></Route>
+      <Route
+        path={"/profile/:id/followers"}
+        element={
+          <PrivateRoute>
+            <Home isConnections={true} isFollowing={false} />
+          </PrivateRoute>
+        }
+      ></Route>
+      <Route
+        path="/post/:id"
+        element={
+          <PrivateRoute>
+            <Home isPost={true} />
+          </PrivateRoute>
+        }
+      ></Route>
+      <Route
+        path="*"
+        element={
+          <PrivateRoute>
+            <Navigate to="/" replace />
+          </PrivateRoute>
+        }
+      />
+    </Routes>
   );
 };
 

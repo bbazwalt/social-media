@@ -12,24 +12,23 @@ import com.azwalt.socialmedia.user.User;
 import com.azwalt.socialmedia.user.UserUtil;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.RequiredArgsConstructor;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(ApiConstants.BASE_API_PATH + "/likes")
 public class LikeController {
 
-	private LikeService likeService;
-
-	public LikeController(LikeService likeService) {
-		this.likeService = likeService;
-	}
+	private final LikeService likeService;
+	private final LikeDtoMapper likeDtoMapper;
+	private final UserUtil userUtil;
 
 	@PutMapping("/{postId}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	public LikeDto likePost(@PathVariable @NotNull Long postId) throws Exception {
-		User user = UserUtil.getCurrentUser();
+		User user = userUtil.getCurrentUser();
 		Like like = likeService.likePost(postId, user);
-		LikeDto likeDto = LikeDtoMapper.toLikeDto(like, user);
-		return likeDto;
+		return likeDtoMapper.toLikeDto(like, user);
 	}
 
 }

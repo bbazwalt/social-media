@@ -42,10 +42,10 @@ const Navigation = () => {
   };
 
   const isActive = (itemPath) => {
-    if (itemPath == "/profile" && location.pathname.includes("/profile/")) {
-      return location.pathname == `${itemPath}/${user?.id}`;
+    if (itemPath === "/profile" && location.pathname.includes("/profile/")) {
+      return location.pathname === `${itemPath}/${user?.id}`;
     }
-    return location.pathname == itemPath;
+    return location.pathname === itemPath;
   };
 
   const handleSignOut = () => {
@@ -72,35 +72,32 @@ const Navigation = () => {
             </div>
           ))}
         </div>
-        <div className="py-2">
-          <Button
-            onClick={handleOpenModal}
-            variant="contained"
-            sx={{
-              fontSize: "1.05rem",
-              textTransform: "capitalize",
-              width: "95%",
-              fontWeight: "bold",
-              borderRadius: "29px",
-              py: "12px",
+        <Button
+          onClick={handleOpenModal}
+          variant="contained"
+          sx={{
+            my: "0.5rem",
+            fontSize: "1.05rem",
+            textTransform: "capitalize",
+            width: "95%",
+            fontWeight: "bold",
+            borderRadius: "29px",
+            py: "12px",
+            boxShadow: "none",
+            ":hover": {
               boxShadow: "none",
-              ":hover": {
-                boxShadow: "none",
-              },
-            }}
-          >
-            Post
-          </Button>
-        </div>
+            },
+          }}
+        >
+          Post
+        </Button>
       </div>
       <div>
-        <div>
-          <PostModal
-            open={openPostModal}
-            profilePicture={user?.profilePicture}
-            handleClose={handleCloseModal}
-          />
-        </div>
+        <PostModal
+          open={openPostModal}
+          profilePicture={user?.profilePicture}
+          handleClose={handleCloseModal}
+        />
         <div className="my-5 ml-4 flex items-center justify-between">
           <div className="flex items-center justify-between ">
             <Avatar
