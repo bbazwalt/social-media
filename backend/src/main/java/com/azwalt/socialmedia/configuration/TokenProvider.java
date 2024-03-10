@@ -17,17 +17,14 @@ public class TokenProvider {
 	private SecretKey key = Keys.hmacShaKeyFor(TokenConstants.SECRET_KEY.getBytes());
 
 	public String generateToken(Authentication authentication) {
-		String token = Jwts.builder().issuer("Benilton Azwalt").issuedAt(new Date())
+		return Jwts.builder().issuer("Benilton Azwalt").issuedAt(new Date())
 				.expiration(new Date(new Date().getTime() + 864000000)).claim("username", authentication.getName())
 				.signWith(key).compact();
-		return token;
 	}
 
 	public String getUsernameFromToken(String token) {
-		token = token.substring(7);
-		Claims claims = Jwts.parser().verifyWith(key).build().parseSignedClaims(token).getPayload();
-		String username = String.valueOf(claims.get("username"));
-		return username;
+		Claims claims = Jwts.parser().verifyWith(key).build().parseSignedClaims(token.substring(7)).getPayload();
+		return String.valueOf(claims.get("username"));
 	}
 
 }

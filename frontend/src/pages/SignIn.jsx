@@ -54,7 +54,7 @@ const SignIn = () => {
       className="flex min-h-screen flex-col items-center justify-center bg-gray-100"
     >
       <h1 className="my-4 text-center text-3xl font-semibold">Sign In</h1>
-      <div className=" min-h-full w-[30rem] rounded-md bg-white  p-10 px-8 pb-8 shadow-md">
+      <div className=" min-h-full w-[30rem] rounded-md bg-white  px-8 pb-8 pt-10 shadow-md">
         <form onSubmit={formik.handleSubmit} className="space-y-4">
           <TextField
             required
@@ -87,7 +87,7 @@ const SignIn = () => {
           />
           <Button
             disabled={isLoading}
-            className="w-full bg-[#1976D2]"
+            fullWidth
             type="submit"
             variant="contained"
             size="large"
@@ -103,7 +103,7 @@ const SignIn = () => {
         )}
         {isLoading && <LoadingText />}
         <div className="mt-5 flex items-center justify-center space-x-1">
-          <p className="m-0">Don't have an account yet?</p>
+          <p>Don't have an account yet?</p>
           <Button
             variant="text"
             sx={{ mt: "0.15rem" }}

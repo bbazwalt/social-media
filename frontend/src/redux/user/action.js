@@ -1,12 +1,12 @@
 import axios from "axios";
 import { API_BASE_URL, AUTH_API_BASE_URL } from "../../api/apiConfig";
 import {
-  FIND_USER_BY_ID_FAILURE,
-  FIND_USER_BY_ID_REQUEST,
-  FIND_USER_BY_ID_SUCCESS,
-  FIND_USER_FAILURE,
-  FIND_USER_REQUEST,
-  FIND_USER_SUCCESS,
+  FIND_REQ_USER_BY_ID_FAILURE,
+  FIND_REQ_USER_BY_ID_REQUEST,
+  FIND_REQ_USER_BY_ID_SUCCESS,
+  FIND_REQ_USER_FAILURE,
+  FIND_REQ_USER_REQUEST,
+  FIND_REQ_USER_SUCCESS,
   FOLLOW_USER_FAILURE,
   FOLLOW_USER_REQUEST,
   FOLLOW_USER_SUCCESS,
@@ -64,13 +64,13 @@ export const signIn = (reqData, authSignIn) => async (dispatch) => {
 };
 
 export const findReqUser = (authSignOut) => async (dispatch) => {
-  dispatch({ type: FIND_USER_REQUEST });
+  dispatch({ type: FIND_REQ_USER_REQUEST });
   try {
     const { data } = await axios.get(`/users/profile`);
-    dispatch({ type: FIND_USER_SUCCESS, payload: data });
+    dispatch({ type: FIND_REQ_USER_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
-      type: FIND_USER_FAILURE,
+      type: FIND_REQ_USER_FAILURE,
       payload: error?.response?.data?.message,
     });
     if (error?.response?.data?.status === false) {
@@ -80,13 +80,13 @@ export const findReqUser = (authSignOut) => async (dispatch) => {
 };
 
 export const findUserById = (userId, navigate) => async (dispatch) => {
-  dispatch({ type: FIND_USER_BY_ID_REQUEST });
+  dispatch({ type: FIND_REQ_USER_BY_ID_REQUEST });
   try {
     const { data } = await axios.get(`users/${userId}`);
-    dispatch({ type: FIND_USER_BY_ID_SUCCESS, payload: data });
+    dispatch({ type: FIND_REQ_USER_BY_ID_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
-      type: FIND_USER_BY_ID_FAILURE,
+      type: FIND_REQ_USER_BY_ID_FAILURE,
       payload: error?.response?.data?.message,
     });
     if (navigate) {

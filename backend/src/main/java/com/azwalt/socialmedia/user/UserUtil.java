@@ -1,5 +1,6 @@
 package com.azwalt.socialmedia.user;
 
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,9 @@ public class UserUtil {
 
 	public User getCurrentUser() throws Exception {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication == null || !authentication.isAuthenticated()) {
+			throw new BadCredentialsException("No authenticated user found.");
+		}
 		String username = authentication.getName();
 		return userService.findUserByUsername(username);
 	}

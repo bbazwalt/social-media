@@ -29,7 +29,8 @@ public class AppConfiguration {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+		return httpSecurity
+				.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(
 						authorize -> authorize.requestMatchers(ApiConstants.BASE_API_PATH + "**").authenticated()
 								.anyRequest().permitAll())
@@ -39,8 +40,7 @@ public class AppConfiguration {
 					} catch (Exception exception) {
 						logger.error("Error disabling CSRF: {}", exception.getMessage());
 					}
-				}).formLogin(withDefaults()).httpBasic(withDefaults());
-		return httpSecurity.build();
+				}).formLogin(withDefaults()).httpBasic(withDefaults()).build();
 	}
 
 	private CorsConfigurationSource corsConfigurationSource() {

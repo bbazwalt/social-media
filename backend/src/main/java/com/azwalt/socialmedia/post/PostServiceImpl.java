@@ -46,9 +46,8 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public Post findPostById(Long postId) throws Exception {
-		Post post = postRepository.findById(postId)
+		return postRepository.findById(postId)
 				.orElseThrow(() -> new PostException("No post found with the given ID."));
-		return post;
 	}
 
 	@Override

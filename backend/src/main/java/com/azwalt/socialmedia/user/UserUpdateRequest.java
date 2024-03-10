@@ -20,4 +20,5 @@ public class UserUpdateRequest {
 	private String profilePicture;
 	private String coverPicture;
 	private String bio;
+	
 }

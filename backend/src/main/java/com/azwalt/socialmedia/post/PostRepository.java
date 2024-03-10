@@ -13,7 +13,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 	@Query("SELECT p FROM Post p WHERE p.replyFor IS NOT NULL AND p.replyFor.id = :parentPostId ORDER BY p.createdAt DESC")
 	public Set<Post> findAllReplyPostsByParentPostId(@Param("parentPostId") Long parentPostId);
 
-	@Query("SELECT p FROM Post p WHERE p.user IN (SELECT f FROM User u JOIN u.following f WHERE u.id = :userId)")
+	@Query("SELECT p FROM Post p WHERE p.user IN (SELECT f FROM User u JOIN u.following f WHERE u.id = :userId) ORDER BY p.createdAt DESC")
 	public Set<Post> findAllByFollowingUserId(@Param("userId") Long userId);
 
 	public Set<Post> findAllByIsPostTrueOrderByCreatedAtDesc();

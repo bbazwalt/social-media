@@ -1,11 +1,11 @@
 import {
   CLEAR_USER_ERROR,
-  FIND_USER_BY_ID_FAILURE,
-  FIND_USER_BY_ID_REQUEST,
-  FIND_USER_BY_ID_SUCCESS,
-  FIND_USER_FAILURE,
-  FIND_USER_REQUEST,
-  FIND_USER_SUCCESS,
+  FIND_REQ_USER_BY_ID_FAILURE,
+  FIND_REQ_USER_BY_ID_REQUEST,
+  FIND_REQ_USER_BY_ID_SUCCESS,
+  FIND_REQ_USER_FAILURE,
+  FIND_REQ_USER_REQUEST,
+  FIND_REQ_USER_SUCCESS,
   FOLLOW_USER_FAILURE,
   FOLLOW_USER_REQUEST,
   FOLLOW_USER_SUCCESS,
@@ -36,8 +36,8 @@ export const userReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case SIGN_UP_REQUEST:
     case SIGN_IN_REQUEST:
-    case FIND_USER_REQUEST:
-    case FIND_USER_BY_ID_REQUEST:
+    case FIND_REQ_USER_REQUEST:
+    case FIND_REQ_USER_BY_ID_REQUEST:
     case SEARCH_USER_REQUEST:
     case FOLLOW_USER_REQUEST:
     case UPDATE_USER_REQUEST:
@@ -45,9 +45,9 @@ export const userReducer = (state = initialState, { type, payload }) => {
     case SIGN_UP_SUCCESS:
     case SIGN_IN_SUCCESS:
       return { ...state, isLoading: false, error: null };
-    case FIND_USER_SUCCESS:
+    case FIND_REQ_USER_SUCCESS:
       return { ...state, isLoading: false, error: null, user: payload };
-    case FIND_USER_BY_ID_SUCCESS:
+    case FIND_REQ_USER_BY_ID_SUCCESS:
       return {
         ...state,
         isLoading: false,
@@ -91,8 +91,8 @@ export const userReducer = (state = initialState, { type, payload }) => {
       };
     case SIGN_UP_FAILURE:
     case SIGN_IN_FAILURE:
-    case FIND_USER_FAILURE:
-    case FIND_USER_BY_ID_FAILURE:
+    case FIND_REQ_USER_FAILURE:
+    case FIND_REQ_USER_BY_ID_FAILURE:
     case SEARCH_USER_FAILURE:
     case FOLLOW_USER_FAILURE:
     case UPDATE_USER_FAILURE:

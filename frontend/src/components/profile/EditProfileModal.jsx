@@ -24,7 +24,7 @@ const style = {
 };
 
 const EditProfileModal = ({ item, open, handleClose }) => {
-  const [isuploading, setIsUploading] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
 
   const fullNameRef = useRef(null);
   const bioRef = useRef(null);
@@ -143,9 +143,9 @@ const EditProfileModal = ({ item, open, handleClose }) => {
                         : blankProfilePicture
                     } `}
                   />
-                  {isuploading && (
+                  {isUploading && (
                     <div className="absolute -translate-y-12 translate-x-44 text-xl font-medium">
-                      Please wait. Uploading...
+                      Uploading...
                     </div>
                   )}
                   <input
