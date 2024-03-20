@@ -32,7 +32,7 @@ public class AppConfiguration {
 		return httpSecurity
 				.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(
-						authorize -> authorize.requestMatchers(ApiConstants.BASE_API_PATH + "**").authenticated()
+						authorize -> authorize.requestMatchers(ApiConstants.BASE_API_PATH + "/**").authenticated()
 								.anyRequest().permitAll())
 				.addFilterBefore(new TokenValidator(), BasicAuthenticationFilter.class).csrf(csrf -> {
 					try {

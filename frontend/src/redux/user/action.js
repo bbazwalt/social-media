@@ -73,9 +73,7 @@ export const findReqUser = (authSignOut) => async (dispatch) => {
       type: FIND_REQ_USER_FAILURE,
       payload: error?.response?.data?.message,
     });
-    if (error?.response?.data?.status === false) {
-      dispatch(signOut(authSignOut));
-    }
+    dispatch(signOut(authSignOut));
   }
 };
 
