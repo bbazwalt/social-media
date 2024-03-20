@@ -18,7 +18,7 @@ import {
   findAllUserPosts,
   likePost,
   repost,
-} from "../../store/post/action";
+} from "../../redux/post/action";
 import { formatCount, formatDateToNowShort } from "../../utils/otherUtils";
 import "./../../styles/post/PostCard.css";
 import ReplyModal from "./ReplyModal";

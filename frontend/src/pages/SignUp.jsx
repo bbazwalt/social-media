@@ -8,9 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import LoadingText from "../components/infoText/LoadingText";
-import { signUp } from "../store/user/action";
-import { CLEAR_USER_ERROR } from "../store/user/actionType";
-import { useAuth } from "../store/user/authContext";
+import { signUp } from "../redux/user/action";
+import { CLEAR_USER_ERROR } from "../redux/user/actionType";
+import { useAuth } from "../redux/user/authContext";
 import { maxDate } from "../utils/otherUtils";
 
 const validationSchema = Yup.object({

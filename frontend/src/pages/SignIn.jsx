@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import LoadingText from "../components/infoText/LoadingText";
-import { signIn } from "../store/user/action";
-import { CLEAR_USER_ERROR } from "../store/user/actionType";
-import { useAuth } from "../store/user/authContext";
+import { signIn } from "../redux/user/action";
+import { CLEAR_USER_ERROR } from "../redux/user/actionType";
+import { useAuth } from "../redux/user/authContext";
 
 const validationSchema = Yup.object({
   username: Yup.string()

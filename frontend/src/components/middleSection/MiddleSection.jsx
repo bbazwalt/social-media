@@ -10,7 +10,7 @@ import {
   createPost,
   findAllFollowingUserPosts,
   findAllPosts,
-} from "../../store/post/action";
+} from "../../redux/post/action";
 import { scrollToTop } from "../../utils/otherUtils";
 import { uploadToCloudinary } from "../../utils/uploadToCloudinary";
 import EmptyItemsText from "../infoText/EmptyItemsText";

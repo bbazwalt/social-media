@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_BASE_URL, AUTH_API_BASE_URL } from "../../api/apiConfig";
+import { API_BASE_URL, AUTH_API_BASE_URL } from "../../config/apiConfig";
 import {
   FIND_REQ_USER_BY_ID_FAILURE,
   FIND_REQ_USER_BY_ID_REQUEST,

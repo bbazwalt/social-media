@@ -15,8 +15,8 @@ import {
   findAllUserMediaPosts,
   findAllUserPosts,
   findAllUserReplyPosts,
-} from "../../store/post/action";
-import { findUserById, followUser } from "../../store/user/action";
+} from "../../redux/post/action";
+import { findUserById, followUser } from "../../redux/user/action";
 import {
   ensureAbsoluteUrl,
   formatCreatedAt,

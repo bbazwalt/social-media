@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { REQUEST_HEADER } from "../../api/apiConfig";
+import { REQUEST_HEADER } from "../../config/apiConfig";
 import { findReqUser } from "./action";
 
 const AuthContext = createContext();

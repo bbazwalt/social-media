@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
-import { useAuth } from "../store/user/authContext";
+import { useAuth } from "../redux/user/authContext";
 
 const App = () => {
   const { token } = useAuth();

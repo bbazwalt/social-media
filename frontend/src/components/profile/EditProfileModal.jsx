@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { modalCloseIcon, updatePictureIcon } from "../../data/icon/iconsData";
 import { blankProfilePicture } from "../../data/image/imagesData";
-import { updateUser } from "../../store/user/action";
+import { updateUser } from "../../redux/user/action";
 import { uploadToCloudinary } from "../../utils/uploadToCloudinary";
 
 const style = {

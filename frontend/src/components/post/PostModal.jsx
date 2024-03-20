@@ -12,7 +12,7 @@ import {
   postImageIcon,
 } from "../../data/icon/iconsData";
 import { blankProfilePicture } from "../../data/image/imagesData";
-import { createPost } from "../../store/post/action";
+import { createPost } from "../../redux/post/action";
 import { uploadToCloudinary } from "../../utils/uploadToCloudinary";
 import LoadingText from "../infoText/LoadingText";
 

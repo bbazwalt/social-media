@@ -6,7 +6,7 @@ import { profileBackIcon } from "../../data/icon/iconsData";
 import {
   findAllReplyPostsByParentPostId,
   findPostById,
-} from "../../store/post/action";
+} from "../../redux/post/action";
 import { scrollToTop } from "../../utils/otherUtils";
 import LoadingText from "../infoText/LoadingText";
 import PostCard from "./PostCard";

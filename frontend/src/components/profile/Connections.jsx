@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { profileBackIcon } from "../../data/icon/iconsData";
-import { findUserById } from "../../store/user/action";
+import { findUserById } from "../../redux/user/action";
 import EmptyItemsText from "../infoText/EmptyItemsText";
 import LoadingText from "../infoText/LoadingText";
 import UserCard from "./UserCard";

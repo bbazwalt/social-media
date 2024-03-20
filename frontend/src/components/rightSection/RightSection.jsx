@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchIcon } from "../../data/icon/iconsData";
-import { searchUsers } from "../../store/user/action";
-import { CLEAR_USER_ERROR } from "../../store/user/actionType";
+import { searchUsers } from "../../redux/user/action";
+import { CLEAR_USER_ERROR } from "../../redux/user/actionType";
 import EmptyItemsText from "../infoText/EmptyItemsText";
 import UserCard from "../profile/UserCard";
 import ErrorSnackBar from "../snackBar/ErrorSnackBar";
