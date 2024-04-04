@@ -50,6 +50,9 @@ export const formatDateToNowShort = (isoDate) => {
   }
   const diffMonths = differenceInMonths(now, date);
   if (diffMonths < 12) {
+    if (diffDays >= 28) {
+      return `${diffMonths + 1}mo`;
+    }
     return `${diffMonths}mo`;
   }
   const diffYears = differenceInYears(now, date);
