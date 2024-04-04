@@ -1,6 +1,6 @@
 # social-media
 
-Social Media Web App • Live Link: https://azwalt-social-media.vercel.app/
+Social Media Web App • Live Link: https://azwalt-social-media.vercel.app
 
 • Tech Stack: Java, Spring Boot, JavaScript, React, Redux, Tailwind CSS, MUI, MySQL, Hibernate, Docker, Render, Vercel & TiDB Cloud.
 
